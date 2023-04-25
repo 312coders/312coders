@@ -10,8 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/joy": "^5.0.0-alpha.76",
+    "@mui/material": "^5.12.1",
+    "@react-three/fiber": "^8.12.2",
+    "@types/three": "^0.150.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.10.0",
+    "three": "^0.151.3"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
