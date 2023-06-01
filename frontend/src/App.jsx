@@ -4,8 +4,12 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import About from "./components/About";
 import Navbar from "./components/Navbar";
+
 import Community from "./components/Community";
 import Contact from "./components/Contact";
+
+import Footer from "./components/Footer";
+
 
 function App() {
   return (
@@ -19,6 +23,7 @@ function App() {
           <Route exact path="/contact" element={<Contact />} />
         </Routes>
       </Router>
+      <Footer />
     </>
   );
 }
