@@ -6,6 +6,7 @@ export default {
       colors: {
         "dark-blue": "#173753",
         "mid-blue": "#1D70A2",
+        "light-blue": "#6DAEDB",
       },
     },
   },
