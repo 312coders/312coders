@@ -9,7 +9,7 @@ function About() {
           <div className="p-5">
             <h3 className="text-center text-xl font-medium pb-3">Who we are</h3>
             <img
-              src="../../public/placeholder.jpg"
+              src="/placeholder.jpg"
               className="hidden md:block"
             />
             <p className="text-center">
@@ -20,7 +20,7 @@ function About() {
           <div className="p-5">
             <h3 className="text-center text-xl font-medium pb-3">What we do</h3>
             <img
-              src="../../public/placeholder.jpg"
+              src="/placeholder.jpg"
               className="hidden md:block"
             />
             <p className="text-center">
@@ -31,7 +31,7 @@ function About() {
           <div className="p-5">
             <h3 className="text-center text-xl font-medium pb-3">Why we do</h3>
             <img
-              src="../../public/placeholder.jpg"
+              src="/placeholder.jpg"
               className="hidden md:block"
             />
             <p className="text-center">
