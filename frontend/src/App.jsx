@@ -9,9 +9,18 @@ import Community from "./components/Community";
 import Contact from "./components/Contact";
 
 import Footer from "./components/Footer";
-
-
+import { useEffect } from "react";
+import { app, api } from "./api";
+import { BlogPost } from "./api/blog";
 function App() {
+
+  useEffect(() => {
+    // if (!app) return;
+    console.log('signing in')
+    api.blog.getPosts().then(console.log);
+    let post = new BlogPost({data: {content: 'je;;p'}})
+    console.log(post)
+  }, [])
   return (
     <>
       <Router>
