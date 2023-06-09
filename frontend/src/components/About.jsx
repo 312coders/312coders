@@ -1,8 +1,8 @@
 function About() {
   return (
     <>
-      <div className="bg-gray-300">
-        <h2 className="text-center text-4xl text-mid-blue font-bold pt-7">
+      <div className="bg-gray-300 py-20 px-10 max-w-4xl m-auto">
+        <h2 className="text-center text-4xl text-mid-blue font-bold">
           About Us
         </h2>
         <div className="columns-1 md:columns-3 p-5">
