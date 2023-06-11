@@ -45,9 +45,24 @@ function About() {
   return (
     <>
       <div className="bg-gray-300 py-20 px-10 max-w-4xl m-auto">
-        <h2 className="text-center text-4xl text-mid-blue font-bold">
+        <h2 className="text-center text-4xl text-mid-blue font-bold pb-5">
           About Us
         </h2>
+
+        <div className="p-5">
+            <h3 className="text-center text-lg">
+              We are a collective of technology enthusiasts based in the
+              Chicagoland area, coming together to collaborate on and engage in
+              discussions about various tech-related topics, all while taking
+              the opportunity to explore the city!
+
+            </h3>
+            <br/>
+            <h3 className="text-center text-lg">
+              Check out all the places we&rsquo;ve been to so far!
+              </h3>
+
+        </div>
         <MapContainer
           className="h-screen"
           center={[41.8781, -87.6298]}
@@ -69,42 +84,6 @@ function About() {
             ))}
           </MarkerClusterGroup>
         </MapContainer>
-
-        {/* <div className="columns-1 md:columns-3 p-5">
-          <div className="p-5">
-            <h3 className="text-center text-xl font-medium pb-3">Who we are</h3>
-            <img
-              src="../../placeholder.jpg"
-              className="hidden md:block rounded"
-            />
-            <p className="text-center">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Assumenda architecto blanditiis veritatis sed impedit!
-            </p>
-          </div>
-          <div className="p-5">
-            <h3 className="text-center text-xl font-medium pb-3">What we do</h3>
-            <img
-              src="../placeholder.jpg"
-              className="hidden md:block rounded"
-            />
-            <p className="text-center">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Assumenda architecto blanditiis veritatis sed impedit!
-            </p>
-          </div>
-          <div className="p-5">
-            <h3 className="text-center text-xl font-medium pb-3">Why we do</h3>
-            <img
-              src="../placeholder.jpg"
-              className="hidden md:block rounded"
-            />
-            <p className="text-center">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Assumenda architecto blanditiis veritatis sed impedit!
-            </p>
-          </div>
-        </div> */}
       </div>
     </>
   );
