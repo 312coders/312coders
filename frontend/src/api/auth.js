@@ -3,8 +3,8 @@ import {
   signInWithEmailAndPassword,
   signOut as signOutFirebase
 } from "firebase/auth";
-
-import { firebaseAuth } from ".";
+import { doc, setDoc } from "firebase/firestore";
+import { db, firebaseAuth } from ".";
 
 export const auth = {
   /**
@@ -17,7 +17,12 @@ export const auth = {
    */
   signUp: async (email, password) => {
     const userCredential = await createUserWithEmailAndPassword(firebaseAuth, email, password);
-    return userCredential.user
+    const user = userCredential.user;
+    await setDoc(doc(db, "users", user.uid), {
+      email: user.email,
+      admin: false,
+    });
+    return user;
   },
 
   /**
@@ -29,7 +34,7 @@ export const auth = {
    * @returns {Promise<User>}
    */
   signIn: async (email, password) => {
-    const userCredential = await signInWithEmailAndPassword(firebaseAuth, email, password)
+    const userCredential = await signInWithEmailAndPassword(firebaseAuth, email, password);
     return userCredential.user;
   },
 
@@ -40,5 +45,12 @@ export const auth = {
    */
   signOut: async () => {
     return await signOutFirebase(firebaseAuth);
-  }
+  },
+
+  /**
+   * Gets the current user
+   * 
+   * @returns {User}
+   */
+  currentUser: () => firebaseAuth.currentUser,
 }
