@@ -1,14 +1,19 @@
 import ReactQuill, { Quill } from "react-quill";
+import { useState, forwardRef, useEffect } from "react";
 
-// #1 import quill-image-uploader
+// @ts-ignore
 import ImageUploader from "quill-image-uploader";
-import React, { useState, forwardRef, useEffect } from "react";
-import { api } from "../api";
+// @ts-ignore
+import ImageResize from 'quill-image-resize-module-react';
+
+import { api, firebaseAuth } from "../api";
 import 'react-quill/dist/quill.snow.css';
 import DOMPurify from 'dompurify';
-
+import useAuth from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 Quill.register("modules/imageUploader", ImageUploader);
+Quill.register('modules/imageResize', ImageResize);
 
 const formats = [
   'header',
@@ -36,11 +41,9 @@ const modules = {
 
     [{ header: '1' }, { header: '2' }, { font: [] }],
     [{ size: [] }],
-    [{ 'indent': '-1'}, { 'indent': '+1' }],
     [{ list: 'ordered' }, { list: 'bullet' }],
     
     ['link', 'image'],
-    ['clean']
   ],
 
   history: {
@@ -62,6 +65,11 @@ const modules = {
           })
       });
     }
+  },
+
+  imageResize: {
+    parchment: Quill.import('parchment'),
+    modules: [ 'Resize', 'DisplaySize', 'Toolbar' ]
   }
 }
 
@@ -69,7 +77,7 @@ type EditorProps = {
   value: string,
   setValue: (value: string) => void
 }
-const Editor = forwardRef((props: EditorProps, ref) => {
+const Editor = forwardRef((props: EditorProps, _ref) => {
   return (
     <ReactQuill
       theme="snow"
@@ -83,21 +91,27 @@ const Editor = forwardRef((props: EditorProps, ref) => {
 
 const EditPage = () => {
   const [value, setValue] = useState('');
+  const { user, loading } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(value)
-  }, [value])
+    if (loading) return;
+    if (!user) {
+      navigate('/');
+    }
+  }, [user, loading])
+  
+  if (!user || loading) {
+    return null;
+  }
 
   return (
     <div className="p-4 m-4">
-      <button onClick={() => api.auth.signIn('kpan8055@gmail.com', 'KP101056')}>
-        sign in
-      </button>
       <div className="border-2 text-editor">
         <Editor value={value} setValue={setValue}/>
       </div>
-      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-        Save
+      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded float-right">
+        save
       </button>
       <div className='ql-snow'>
         {<div className='ql-editor' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(value) }} />}

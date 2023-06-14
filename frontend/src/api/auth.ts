@@ -1,4 +1,5 @@
 import {
+  User,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut as signOutFirebase
@@ -15,7 +16,7 @@ export const auth = {
    * @param {string} password 
    * @returns {Promise<User>}
    */
-  signUp: async (email, password) => {
+  signUp: async (email: string, password: string): Promise<User> => {
     const userCredential = await createUserWithEmailAndPassword(firebaseAuth, email, password);
     const user = userCredential.user;
     await setDoc(doc(db, "users", user.uid), {
@@ -33,7 +34,7 @@ export const auth = {
    * @param {string} password 
    * @returns {Promise<User>}
    */
-  signIn: async (email, password) => {
+  signIn: async (email: string, password: string): Promise<User> => {
     const userCredential = await signInWithEmailAndPassword(firebaseAuth, email, password);
     return userCredential.user;
   },
@@ -43,7 +44,7 @@ export const auth = {
    * 
    * @returns {Promise<void>}
    */
-  signOut: async () => {
+  signOut: async (): Promise<void> => {
     return await signOutFirebase(firebaseAuth);
   },
 
@@ -52,5 +53,5 @@ export const auth = {
    * 
    * @returns {User}
    */
-  currentUser: () => firebaseAuth.currentUser,
+  currentUser: (): User | null => firebaseAuth.currentUser,
 }

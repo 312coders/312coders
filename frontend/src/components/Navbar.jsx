@@ -20,6 +20,9 @@ function Navbar() {
             <li className="mr-8 mt-5">
               <Link to="/contact">Contact</Link>
             </li>
+            <li className="mr-8 mt-5">
+              <Link to="/edit">Edit</Link>
+            </li>
           </ul>
         </nav>
       </div>

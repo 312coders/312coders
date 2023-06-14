@@ -1,5 +1,5 @@
 // import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 // import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import About from "./components/About";
@@ -9,8 +9,8 @@ import Community from "./components/Community";
 import Contact from "./components/Contact";
 import Editor from './components/Editor';
 import Footer from "./components/Footer";
-function App() {
 
+function App() {
   return (
     <>
       <Router>

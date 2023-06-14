@@ -1,18 +1,18 @@
-import { db, firebaseStorage } from ".";
+import { firebaseStorage } from ".";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 
 
 export const storage = {
   /**
+   * Uploads an image to firebase cloud storage, returns the url to the image
    * 
    * @param {File} file 
    */
-  uploadImage: async (file) => {
+  uploadImage: async (file: File) => {
     try {
-      console.log(file.name)
       const blogImagesRef = ref(firebaseStorage, 'blog-images');
-      const imageRef = ref(blogImagesRef, `${file.name}_${Date.now()}`);
+      const imageRef = ref(blogImagesRef, `${Date.now()}_${file.name}`);
       const result = await uploadBytes(imageRef, file);
       const url = await getDownloadURL(result.ref);
       return url;
