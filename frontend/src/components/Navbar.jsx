@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 
 function Navbar() {
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
+  const [button, setButton] = useState(true);
 
   const toggleHamburger = () => {
     setHamburgerOpen(!hamburgerOpen);
@@ -16,7 +17,9 @@ function Navbar() {
 
   const showButton = () => {
     if (window.innerWidth <= 960) {
-      setHamburgerOpen(false);
+      setButton(false);
+    } else {
+      setButton(true);
     }
   };
 
@@ -42,7 +45,7 @@ function Navbar() {
                 <Link
                   to="/"
                   className="hover:text-red-500 transition duration-500"
-                  onClick={closeMobileMenu}
+                  onClick={toggleHamburger}
                 >
                   Home
                 </Link>

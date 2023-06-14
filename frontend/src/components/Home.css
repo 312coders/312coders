@@ -1,0 +1,19 @@
+.background-img {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)),
+    url("/lake.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  position: relative;
+}
+
+.welcome {
+  text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, 3px 3px 0 #000000,
+    3px 3px 0 #000;
+  color: #41b6e5;
+}
+
+.margin {
+  color: #e4002b;
+}
