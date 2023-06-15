@@ -1,5 +1,3 @@
-// import React from "react";
-//import "./Navbar.css";
 import { Link } from "react-router-dom";
 import Hamburger from "./Hamburger";
 import "./Navbar.css";
@@ -36,6 +34,7 @@ function Navbar() {
     <>
       <nav>
         <div className="navbar bg-dark-blue text-white pb-3  max-w-4xl m-auto">
+          {hamburgerOpen &&
           <div>
             <ul className="flex justify-center md:justify-end md:text-xl max-w-4xl mx-auto px-7 items-center ">
               <li className="mr-10 mt-5">
@@ -76,8 +75,9 @@ function Navbar() {
               </li>
             </ul>
           </div>
+          }
           <div className="Hamburger" onClick={toggleHamburger}>
-            <Hamburger />
+              <Hamburger />
           </div>
         </div>
       </nav>
