@@ -17,3 +17,29 @@
 .margin {
   color: #e4002b;
 }
+
+.intro {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.tag {
+  position: absolute;
+  margin-top: 5rem;
+  top: 50%;
+  color: white;
+  font-size: 25px;
+  text-shadow: 1px -1px 0 #050505, 1px 1px 0 #000000, 2px 2px 0 #0f0f0f,
+    2px 2px 0 #000000;
+}
+
+@media (max-width: 769px) {
+  .intro {
+    margin-top: 2rem;
+  }
+  div img {
+    width: 300px;
+    margin-top: 3rem;
+  }
+}
