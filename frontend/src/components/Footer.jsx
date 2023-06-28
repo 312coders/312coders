@@ -6,7 +6,7 @@ import Logo from "/logo.png";
 
 function Footer() {
   return (
-    <footer className="bg-gray-800 py-4 px-8 max-w-4xl m-auto">
+    <footer className="bg-gray-800 py-4 px-8 max-w-auto mx-auto">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-white flex items-center">
           <img
