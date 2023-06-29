@@ -1,4 +1,5 @@
 import About from "./About";
+import Discord from "./Discord";
 import Community from "./Community";
 import Contact from "./Contact";
 
@@ -15,6 +16,7 @@ function Home() {
       </div>
       <About />
       <Community />
+      <Discord />
       <Contact />
     </>
   );
