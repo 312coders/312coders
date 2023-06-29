@@ -1,0 +1,11 @@
+.nav-list {
+  display: none;
+}
+
+.nav-list.show {
+  display: inline;
+}
+
+.nav-list.hide {
+  display: none;
+}

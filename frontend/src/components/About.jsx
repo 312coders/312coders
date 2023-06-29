@@ -48,7 +48,6 @@ function About() {
         <h2 className="text-center text-4xl text-mid-blue font-bold pb-5">
           About Us
         </h2>
-
         <div className="p-5">
             <h3 className="text-center text-lg">
               We are a collective of technology enthusiasts based in the
