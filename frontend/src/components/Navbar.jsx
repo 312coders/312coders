@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 
 function Navbar() {
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
+  const [button, setButton] = useState(true);
 
   const toggleHamburger = () => {
     setHamburgerOpen(!hamburgerOpen);
@@ -15,6 +16,7 @@ function Navbar() {
   const showButton = () => {
     if (window.innerWidth <= 768) {
       setHamburgerOpen(false);
+
     }
   };
 
