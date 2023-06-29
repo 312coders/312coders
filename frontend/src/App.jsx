@@ -20,7 +20,10 @@ function App() {
           <Route exact path="/about" element={<About />} />
           <Route exact path="/community" element={<Community />} />
           <Route exact path="/contact" element={<Contact />} />
-          <Route exact path="/edit" element={<Editor />} />
+          <Route
+            path="/edit/:id"
+            element={<Editor />}
+          />
         </Routes>
       </Router>
       <Footer />

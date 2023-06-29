@@ -1,5 +1,5 @@
-import { collection, query, limit, orderBy, getDoc, getDocs, Timestamp, startAt, DocumentReference, addDoc, doc, setDoc, DocumentData, Query } from "firebase/firestore";
-import { firebaseAuth, db } from ".";
+import { DocumentData, DocumentReference, Query, Timestamp, addDoc, collection, deleteDoc, doc, getDoc, getDocs, limit, orderBy, query, setDoc, startAt } from "firebase/firestore";
+import { api, db, firebaseAuth } from ".";
 
 interface IBlogPost {
   id?: string;
@@ -47,7 +47,7 @@ export const blog = {
    * @param {number} resultsPerPage 
    * @returns 
    */
-  getPosts: async (page: number, resultsPerPage: number) => {
+  getPosts: async (page?: number, resultsPerPage?: number) => {
     let q: Query<DocumentData>;
     if (!page || !resultsPerPage) {
       q = query(collection(db, "blog-posts"), orderBy("dateUpdated"))
@@ -79,10 +79,14 @@ export const blog = {
       throw new Error('Could not get post');
     }
     for (const fieldName of ['createdByUser', 'updatedByUser', 'blog-content']) {
-      if (data[fieldName]) {
+      if (fieldName === 'blog-content') {
+        const blogContent = (await getDoc(data[fieldName])).data() as Record<string, string>;
+        data['content'] = blogContent['content'];
+      } else if (data[fieldName]) {
         data[fieldName] = (await getDoc(data[fieldName])).data();
       }
     }
+    console.log(data)
     return new BlogPost({ id: post.id, data: data });
   },
 
@@ -122,9 +126,32 @@ export const blog = {
       title: blog.title,
       dateUpdated: Timestamp.now(),
       updatedByUser: doc(db, 'users', firebaseAuth.currentUser.uid),
-    })
+    }, { merge: true })
     await setDoc(doc(db, "blog-content", blog.id), {
       content: blog.content
     })
+  },
+
+  deletePost: async (id: string) => {
+    const post = await getDoc(doc(db, "blog-content", id));
+    const data = post.data();
+    if (!post || !data) {
+      throw new Error('Could not get post');
+    }
+    const content = data['content'];
+    const regx = /<img[^>]+src="?([^"\s]+)"?\s*\/>/g;
+    
+    let url: RegExpExecArray | null;
+    let urls = [];
+    while (url = regx.exec(content)) {
+      urls.push(url[1]);
+    }
+    
+    // delete the blog-posts and blog-content entry, but also delete the images
+    return await Promise.all([
+      deleteDoc(doc(db, 'blog-posts', id)),
+      deleteDoc(doc(db, 'blog-content', id)),
+      urls.map((url) => api.storage.deleteImage(url))
+    ])
   }
 }

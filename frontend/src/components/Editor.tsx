@@ -6,11 +6,12 @@ import ImageUploader from "quill-image-uploader";
 // @ts-ignore
 import ImageResize from 'quill-image-resize-module-react';
 
-import { api, firebaseAuth } from "../api";
+import { api } from "../api";
 import 'react-quill/dist/quill.snow.css';
 import DOMPurify from 'dompurify';
 import useAuth from "../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { BlogPost } from "../api/blog";
 
 Quill.register("modules/imageUploader", ImageUploader);
 Quill.register('modules/imageResize', ImageResize);
@@ -77,7 +78,11 @@ type EditorProps = {
   value: string,
   setValue: (value: string) => void
 }
+
 const Editor = forwardRef((props: EditorProps, _ref) => {
+  useEffect(() => {
+    console.log(props.value)
+  }, [props])
   return (
     <ReactQuill
       theme="snow"
@@ -89,35 +94,4 @@ const Editor = forwardRef((props: EditorProps, _ref) => {
   );
 })
 
-const EditPage = () => {
-  const [value, setValue] = useState('');
-  const { user, loading } = useAuth();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (loading) return;
-    if (!user) {
-      navigate('/');
-    }
-  }, [user, loading])
-  
-  if (!user || loading) {
-    return null;
-  }
-
-  return (
-    <div className="p-4 m-4">
-      <div className="border-2 text-editor">
-        <Editor value={value} setValue={setValue}/>
-      </div>
-      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded float-right">
-        save
-      </button>
-      <div className='ql-snow'>
-        {<div className='ql-editor' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(value) }} />}
-      </div>
-    </div>
-  )
-}
-
-export default EditPage;
+export default Editor;

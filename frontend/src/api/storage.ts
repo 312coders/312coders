@@ -1,5 +1,5 @@
 import { firebaseStorage } from ".";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 
 
 
@@ -19,5 +19,11 @@ export const storage = {
     } catch (error) {
       throw error;
     }
+  },
+
+  deleteImage: async (path: string) => {
+    const blogImagesRef = ref(firebaseStorage, 'blog-images');
+    const imageRef = ref(blogImagesRef, path);
+    return await deleteObject(imageRef);
   }
 };

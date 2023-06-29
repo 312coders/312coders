@@ -18,12 +18,7 @@ export const auth = {
    */
   signUp: async (email: string, password: string): Promise<User> => {
     const userCredential = await createUserWithEmailAndPassword(firebaseAuth, email, password);
-    const user = userCredential.user;
-    await setDoc(doc(db, "users", user.uid), {
-      email: user.email,
-      admin: false,
-    });
-    return user;
+    return userCredential.user;
   },
 
   /**
