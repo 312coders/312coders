@@ -1,7 +1,6 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { Icon, divIcon, point } from "leaflet";
-import pinIcon from "../img/marker-icon.png";
 import MarkerClusterGroup from "react-leaflet-cluster";
 
 const markers = [
@@ -28,7 +27,7 @@ const markers = [
 ];
 
 const customIcon = new Icon({
-  iconUrl: pinIcon,
+  iconUrl: './marker-icon.png',
   iconSize: [30, 30],
 });
 
