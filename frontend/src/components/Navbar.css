@@ -4,7 +4,7 @@
 }
 
 @media (max-width: 768px) {
-  ul .nav-list {
+  ul .nav-list Link {
     display: none;
   }
 }

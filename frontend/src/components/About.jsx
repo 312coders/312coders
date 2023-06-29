@@ -1,7 +1,7 @@
 function About() {
   return (
     <>
-      <div className="bg-gray-300 py-20 px-10 max-w-4xl m-auto">
+      <div className="bg-gray-300 py-20 px-10 max-w-4xl m-auto" id="about">
         <h2 className="text-center text-4xl text-mid-blue font-bold">
           About Us
         </h2>

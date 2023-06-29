@@ -39,36 +39,36 @@ function Navbar() {
               <ul className="flex justify-center md:justify-end md:text-xl max-w-4xl mx-auto px-7 items-center nav-list">
                 <li className="mr-10 mt-5">
                   <Link
-                    to="/"
+                    to="/#home"
                     className="hover:text-red-500 transition duration-500"
-                    onClick={closeMobileMenu}
+                    onClick={() => this.props.scrollToSection("home")}
                   >
                     Home
                   </Link>
                 </li>
                 <li className="mr-10 mt-5">
                   <Link
-                    to="/about"
+                    to="/#about"
                     className="hover:text-red-500 transition duration-500"
-                    onClick={closeMobileMenu}
+                    onClick={() => this.props.scrollToSection("about")}
                   >
                     About
                   </Link>
                 </li>
                 <li className="mr-10 mt-5">
                   <Link
-                    to="/community"
+                    to="/#community"
                     className="hover:text-red-500 transition duration-500"
-                    onClick={closeMobileMenu}
+                    onClick={() => this.props.scrollToSection("community")}
                   >
                     Community
                   </Link>
                 </li>
                 <li className="mr-10 mt-5">
                   <Link
-                    to="/contact"
+                    to="/#contact"
                     className="hover:text-red-500 transition duration-500"
-                    onClick={closeMobileMenu}
+                    onClick={() => this.props.scrollToSection("contact")}
                   >
                     Contact
                   </Link>

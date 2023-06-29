@@ -1,7 +1,7 @@
 function Community() {
   return (
     <>
-      <div className="bg-light-blue py-10 px-8 max-w-4xl m-auto">
+      <div className="bg-light-blue py-10 px-8 max-w-4xl m-auto" id="community">
         <h3 className="text-center font-semibold text-3xl pb-5">Community</h3>
         <div className="column-1 md:columns-2 p-4">
           <img src="/skyline.jpg" className="block object-scale-down rounded" />
