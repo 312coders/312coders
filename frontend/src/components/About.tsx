@@ -69,22 +69,21 @@ function About() {
             Check out all the places we&rsquo;ve been to so far!
           </h3>
           <br />
-          <h3 className="text-xl text-mid-blue font-bold pb-5 ">
-            Collaborators
-          </h3>
+          <h3 className="text-xl text-mid-blue font-bold">Collaborators</h3>
+        </div>
+        <div className="flex justify-center items-center space-x-4 pb-4">
           <a href="https://github.com/Michaeljaurigue">
             <p className="hover:text-blue-800">Michael Jaurigue</p>
           </a>
           <a href="https://github.com/EmmeRox">
-          <p className="hover:text-blue-800">Emmeline Ocampo</p>
+            <p className="hover:text-blue-800">Emmeline Ocampo</p>
           </a>
           <a href="https://github.com/kevinpan47">
-          <p className="hover:text-blue-800">Kevin Pan</p>
+            <p className="hover:text-blue-800">Kevin Pan</p>
           </a>
           <a href="https://github.com/mayamauchi">
-          <p className="hover:text-blue-800">Maaya Yamauchi</p>
+            <p className="hover:text-blue-800">Maaya Yamauchi</p>
           </a>
-          <br />
         </div>
         <MapContainer
           className="h-screen"
