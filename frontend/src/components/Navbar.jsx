@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Hamburger from "./Hamburger";
+import "./Hamburger.css";
 import "./Navbar.css";
 import { useState, useEffect } from "react";
 
@@ -12,31 +13,33 @@ function Navbar() {
 
   const closeMobileMenu = () => setHamburgerOpen(false);
 
-  const showButton = () => {
-    if (window.innerWidth <= 768) {
-      setHamburgerOpen(false);
-    }
-  };
+  // const showButton = () => {
+  //   if (window.innerWidth <= 768) {
+  //     setHamburgerOpen(false);
+  //   }
+  // };
 
-  useEffect(() => {
-    showButton();
-  }, []);
+  // useEffect(() => {
+  //   showButton();
+  // }, []);
 
-  useEffect(() => {
-    window.addEventListener("resize", showButton);
+  // useEffect(() => {
+  //   window.addEventListener("resize", showButton);
 
-    return () => {
-      window.removeEventListener("resize", showButton);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("resize", showButton);
+  //   };
+  // }, []);
 
   return (
     <>
       <nav>
         <div className="navbar bg-dark-blue text-white pb-3  max-w-4xl m-auto">
-          {!hamburgerOpen && (
-            <div>
-              <ul className="flex justify-center md:justify-end md:text-xl max-w-4xl mx-auto px-7 items-center nav-list">
+              <div onClick={toggleHamburger} className="md:hidden cursor-pointer">
+            <Hamburger />
+          </div>
+            <div>   
+              <ul className={hamburgerOpen ? "flex justify-end md:justify-center md:text-xl max-w-4xl mx-auto px-7 items-end" : 'justify-center md:justify-end md:text-xl max-w-4xl mx-auto px-7 hidden md:inline-flex items-end'}>
                 <li className="mr-10 mt-5">
                   <Link
                     to="/#home"
@@ -75,10 +78,7 @@ function Navbar() {
                 </li>
               </ul>
             </div>
-          )}
-          <div className="Hamburger" onClick={toggleHamburger}>
-            <Hamburger />
-          </div>
+       
         </div>
       </nav>
     </>

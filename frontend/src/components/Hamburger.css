@@ -3,7 +3,7 @@
   height: 2rem;
   flex-flow: column nowrap;
   z-index: 10;
-  display: none;
+  /* display: none; */
 }
 
 .Hamburger .burger {
@@ -14,12 +14,12 @@
   transition: all 0.3s linear;
 }
 
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
   .Hamburger .burger {
     display: none;
   }
-}
-
+} */
+/* 
 @media (max-width: 767px) {
   .Hamburger {
     display: inline;
@@ -29,4 +29,4 @@
   .Hamburger .burger {
     margin-top: 0.5rem;
   }
-}
+} */
