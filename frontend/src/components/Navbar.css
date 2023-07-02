@@ -2,9 +2,10 @@
   display: block;
   padding: 0.2rem;
 }
+*/
 
 @media (max-width: 768px) {
-  ul .nav-list Link {
-    display: none;
+  ul {
+    display: block;
   }
-} */
+}

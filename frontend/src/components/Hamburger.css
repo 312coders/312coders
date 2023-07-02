@@ -8,25 +8,9 @@
 
 .Hamburger .burger {
   width: 3rem;
+  margin: 0.25rem;
   height: 0.25rem;
   border-radius: 10px;
   transform-origin: 1px;
   transition: all 0.3s linear;
 }
-
-/* @media (min-width: 768px) {
-  .Hamburger .burger {
-    display: none;
-  }
-} */
-/* 
-@media (max-width: 767px) {
-  .Hamburger {
-    display: inline;
-    z-index: 10;
-  }
-
-  .Hamburger .burger {
-    margin-top: 0.5rem;
-  }
-} */
