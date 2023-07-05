@@ -3,6 +3,22 @@
   padding: 0.2rem;
 }
 */
+ul {
+  margin-right: 0;
+}
+
+.nav-logo {
+  width: 80px;
+  position: relative;
+  top: 15px;
+  left: -300px;
+}
+
+@media (max-width: 870px) {
+  .nav-logo {
+    display: none;
+  }
+}
 
 @media (max-width: 768px) {
   ul {

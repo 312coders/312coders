@@ -43,9 +43,18 @@ function Navbar() {
               className={
                 hamburgerOpen
                   ? "flex-nowrap md:text-xl mx-auto px-7"
-                  : "justify-end md:text-xl mx-auto px-2 hidden md:inline-flex items-end"
+                  : "justify-end md:text-xl px-2 hidden md:inline-flex items-end"
               }
             >
+              <li className="mr-10 mt-5">
+                <Link
+                  to="/#home"
+                  className="hover:text-red-500 transition duration-500"
+                  onClick={() => this.props.scrollToSection("home")}
+                >
+                  <img src="../../public/logo.png" className="nav-logo" />
+                </Link>
+              </li>
               <li className="mr-10 mt-5">
                 <Link
                   to="/#home"
