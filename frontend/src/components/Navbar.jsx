@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 
 function Navbar() {
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
+  const [button, setButton] = useState(true);
 
   const toggleHamburger = () => {
     setHamburgerOpen(!hamburgerOpen);
@@ -52,7 +53,7 @@ function Navbar() {
                   className="hover:text-red-500 transition duration-500"
                   onClick={() => this.props.scrollToSection("home")}
                 >
-                  <img src="../../public/logo.png" className="nav-logo" />
+                  <img src="/logo.png" className="nav-logo" />
                 </Link>
               </li>
               <li className="mr-10 mt-5">
