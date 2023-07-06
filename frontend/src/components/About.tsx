@@ -36,12 +36,12 @@ const markers: MarkerData[] = [
 ];
 
 const customIcon = new Icon({
-  iconUrl: "./marker-icon.png",
+  iconUrl: "/marker-icon.png",
   iconSize: [30, 30],
 });
 
 const createCustomClusterIcon = (cluster: any) => {
-  return new divIcon({
+  return divIcon({
     //the amount of icons per cluster
     html: `<div class="cluster-icon">${cluster.getChildCount()}</div>`,
     className:

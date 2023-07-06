@@ -1,17 +1,13 @@
+import { forwardRef, useEffect } from "react";
 import ReactQuill, { Quill } from "react-quill";
-import { useState, forwardRef, useEffect } from "react";
 
 // @ts-ignore
 import ImageUploader from "quill-image-uploader";
 // @ts-ignore
 import ImageResize from 'quill-image-resize-module-react';
 
-import { api } from "../api";
 import 'react-quill/dist/quill.snow.css';
-import DOMPurify from 'dompurify';
-import useAuth from "../hooks/useAuth";
-import { useNavigate, useParams } from "react-router-dom";
-import { BlogPost } from "../api/blog";
+import { api } from "../api";
 
 Quill.register("modules/imageUploader", ImageUploader);
 Quill.register('modules/imageResize', ImageResize);
