@@ -1,33 +1,58 @@
 // import React from "react";
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 // import Navbar from "./components/Navbar";
-import Home from "./components/Home";
 import About from "./components/About";
+import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 
 import Community from "./components/Community";
 import Contact from "./components/Contact";
-import Editor from './components/Editor';
 import Footer from "./components/Footer";
+import EditPage from './pages/EditPage';
+
+const Layout = () => {
+  return (
+    <>
+      <Navbar />
+      <main>
+        <Outlet />
+      </main>
+      <Footer />
+    </>
+  )
+}
+
+const router = createBrowserRouter([
+  {
+    element: <Layout />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/about",
+        element: <About />
+      },
+      {
+        path: "/community",
+        element: <Community />
+      },
+      {
+        path: "/contact",
+        element: <Contact />
+      },
+      {
+        path: "/edit/:id",
+        element: <EditPage />
+      }
+    ]
+  }
+])
 
 function App() {
   return (
-    <>
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/about" element={<About />} />
-          <Route exact path="/community" element={<Community />} />
-          <Route exact path="/contact" element={<Contact />} />
-          <Route
-            path="/edit/:id"
-            element={<Editor />}
-          />
-        </Routes>
-      </Router>
-      <Footer />
-    </>
+    <RouterProvider router={router} />
   );
 }
 
