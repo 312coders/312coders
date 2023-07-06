@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { api } from "../api";
 
-import useAuth from '../hooks/useAuth';
+import useAuth from "../hooks/useAuth";
 
 import FacebookLogo from "/facebook.png";
 import InstagramLogo from "/instagram.png";
@@ -10,10 +10,28 @@ import Logo from "/logo.png";
 import TwitterLogo from "/twitter.png";
 
 function Footer() {
-  
   const { user } = useAuth();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [resetEmailSent, setResetEmailSent] = useState(false);
+
+  const handleForgotPassword = () => {
+    if (email) {
+      api.auth
+        .sendPasswordResetEmail(email)
+        .then(() => {
+          console.log("Password reset email sent successfully");
+          setResetEmailSent(true); // Set the state to indicate that the email was sent
+        })
+        .catch((error) => {
+          console.error("Error sending password reset email:", error);
+          // Handle any errors that occurred during sending the password reset email
+        });
+    } else {
+      console.log("Please enter your email to reset the password");
+      // Add any additional logic here, such as showing an error message to the user
+    }
+  };
 
   return (
     <footer className="bg-gray-800 py-4 px-8 max-w-4xl m-auto">
@@ -25,8 +43,7 @@ function Footer() {
             alt="Logo"
           />
           <span className="text-xs text-gray-300">312Coders © 2023</span>
-          {
-            user === null ?
+          {user === null ? (
             <div className="space-x-1">
               <input
                 className="text-xs border rounded py-2 px-3 text-gray-700"
@@ -50,8 +67,19 @@ function Footer() {
               >
                 login
               </button>
+              <button
+                className="text-xs bg-gray-500 hover:bg-gray-700 rounded p-2 font-bold"
+                onClick={handleForgotPassword}
+              >
+                Forgot Password
+              </button>
+              {resetEmailSent && (
+                <span className="text-xs text-green-500 ml-2">
+                  Password reset email sent!
+                </span>
+              )}
             </div>
-            :
+          ) : (
             <div>
               <button
                 className="text-xs bg-red-500 hover:bg-red-700 rounded p-2 font-bold"
@@ -60,7 +88,7 @@ function Footer() {
                 logout
               </button>
             </div>
-          }
+          )}
         </div>
         <div className="text-white flex">
           <a
