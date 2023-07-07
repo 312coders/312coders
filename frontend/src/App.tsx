@@ -12,6 +12,7 @@ import EditPage from './pages/EditPage';
 import { api } from "./api";
 import { AlertContextProvider } from "./hooks/useAlert";
 import Alert from "./components/Alert";
+import PostPage from "./pages/PostPage";
 
 const Layout = () => {
   return (
@@ -57,16 +58,7 @@ const router = createBrowserRouter([
               </ProtectedRoute>,
             loader: async () => {
               return await api.blog.getPosts();
-            },
-            action: async ({ request, params }) => {
-              console.log(request)
-              if (request.method === 'DELETE') {
-                const formData = await request.formData();
-                await api.blog.deletePost(formData.get('id')?.toString() ?? '');
-                return null;
-              }
-              return null;
-            },
+            }
           },
           {
             path: "edit/:id",
@@ -74,6 +66,17 @@ const router = createBrowserRouter([
               <ProtectedRoute>
                 <EditPage />
               </ProtectedRoute>,
+            loader: async ({ params }) => {
+              if (params.id) {
+                return await api.blog.getPost(params.id ?? '');
+              } else {
+                return null;
+              }
+            },
+          },
+          {
+            path: "post/:id",
+            element: <PostPage />,
             loader: async ({ params }) => {
               if (params.id) {
                 return await api.blog.getPost(params.id ?? '');

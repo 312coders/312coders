@@ -19,7 +19,7 @@ const AdminPostsPage = () => {
           className="bg-blue-500 hover:bg-blue-700 rounded p-1 font-bold text-white"
           onClick={async () => {
             const newPostId = await api.blog.createPost(new BlogPost());
-            navigate(`blog/edit/${newPostId}`);
+            navigate(`/blog/edit/${newPostId}`);
           }}
         >
           add new post

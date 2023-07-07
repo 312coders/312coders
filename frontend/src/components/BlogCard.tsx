@@ -29,22 +29,18 @@ const BlogCard = (props: Props) => {
       </div>
       <div className="container mt-2 space-x-2">
         <button
-          className="bg-gray-300 hover:bg-green-500 transition rounded p-1 font-bold"
+          className="bg-gray-300 hover:bg-gray-400 transition rounded p-1 font-bold"
         >
           <Link to={`/blog/edit/${blogPost.id}`}>
             edit
           </Link>
         </button>
         <button
-          className="bg-gray-300 hover:bg-red-500 transition rounded p-1 font-bold"
-          onClick={async (e) => {
-            submit({ id: blogPost.id ?? '' }, {
-              method: "delete",
-              action: `/blog/admin-posts`,
-            });
-          }}
+          className="bg-gray-300 hover:bg-blue-400 transition rounded p-1 font-bold"
         >
-          delete
+          <Link to={`/blog/post/${blogPost.id}`}>
+            preview
+          </Link>
         </button>
         <span>
           {blogPost.isPublic ? (

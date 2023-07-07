@@ -1,6 +1,5 @@
-import DOMPurify from "dompurify";
 import { useEffect, useState } from "react";
-import { useLoaderData, useNavigate, useSubmit } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { api } from "../api";
 import { BlogPost } from "../api/blog";
 import Editor from "../components/Editor";
@@ -61,6 +60,17 @@ const EditPage = () => {
           save
         </button>
         <button
+          className="bg-red-500 hover:bg-red-700 transition text-white font-bold py-2 px-4 rounded float-right"
+          onClick={() => {
+            api.blog.deletePost(post.id ?? '').then(() => {
+              navigate('/blog/admin-posts');
+              setMsg('Post deleted!', 'success');
+            })
+          }}
+        >
+          delete
+        </button>
+        <button
           className="bg-gray-500 hover:bg-gray-700 transition text-white font-bold py-2 px-4 rounded float-right"
           onClick={() => {
             navigate(-1);
@@ -78,9 +88,6 @@ const EditPage = () => {
           })}
         />
       </div>
-      {/* <div className='ql-snow'>
-        {<div className='ql-editor' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content ?? '') }} />}
-      </div> */}
     </div>
   )
 }
