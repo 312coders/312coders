@@ -38,13 +38,10 @@ const BlogCard = (props: Props) => {
         <button
           className="bg-gray-300 hover:bg-red-500 transition rounded p-1 font-bold"
           onClick={async (e) => {
-            if (blogPost.id) {
-              // await api.blog.deletePost(blogPost.id)
-              submit({ id: blogPost.id }, {
-                method: "delete",
-                action: `/admin-posts`,
-              });
-            }
+            submit({ id: blogPost.id ?? '' }, {
+              method: "delete",
+              action: `/admin-posts`,
+            });
           }}
         >
           delete

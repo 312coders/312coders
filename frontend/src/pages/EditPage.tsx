@@ -4,12 +4,13 @@ import { useLoaderData, useNavigate, useSubmit } from "react-router-dom";
 import { api } from "../api";
 import { BlogPost } from "../api/blog";
 import Editor from "../components/Editor";
+import { useAlert } from "../hooks/useAlert";
 
 const EditPage = () => {
   const data = useLoaderData() as BlogPost;
   const [post, setPost] = useState<BlogPost>(data);
   const navigate = useNavigate();
-  
+  const { setMsg } = useAlert();
   const saveBtnEnabled = () => {
     console.log(JSON.stringify(data) === JSON.stringify(post))
     return JSON.stringify(data) !== JSON.stringify(post)
@@ -36,7 +37,9 @@ const EditPage = () => {
         <button
           className="bg-blue-500 hover:bg-blue-700 transition text-white font-bold py-2 px-4 rounded float-right"
           onClick={() => {
-            api.blog.updatePost(post)
+            api.blog.updatePost(post).then(() => {
+              setMsg('Post saved!', 'success');
+            })
           }}
         >
           save

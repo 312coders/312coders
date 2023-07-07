@@ -10,16 +10,19 @@ import ProtectedRoute from './components/ProtectedRoute';
 import AdminPostsPage from './pages/AdminPostsPage';
 import EditPage from './pages/EditPage';
 import { api } from "./api";
+import { AlertContextProvider } from "./hooks/useAlert";
+import Alert from "./components/Alert";
 
 const Layout = () => {
   return (
-    <>
+    <AlertContextProvider>
       <Navbar />
       <main>
         <Outlet />
+        <Alert />
       </main>
       <Footer />
-    </>
+    </AlertContextProvider>
   )
 }
 
