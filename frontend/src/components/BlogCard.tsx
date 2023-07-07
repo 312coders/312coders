@@ -31,7 +31,7 @@ const BlogCard = (props: Props) => {
         <button
           className="bg-gray-300 hover:bg-green-500 transition rounded p-1 font-bold"
         >
-          <Link to={`/edit/${blogPost.id}`}>
+          <Link to={`/blog/edit/${blogPost.id}`}>
             edit
           </Link>
         </button>
@@ -40,12 +40,29 @@ const BlogCard = (props: Props) => {
           onClick={async (e) => {
             submit({ id: blogPost.id ?? '' }, {
               method: "delete",
-              action: `/admin-posts`,
+              action: `/blog/admin-posts`,
             });
           }}
         >
           delete
         </button>
+        <span>
+          {blogPost.isPublic ? (
+            <div className="inline-flex bg-green-200 rounded p-1">
+              <h6 className="mr-1">public</h6>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 10.5V6.75a4.5 4.5 0 119 0v3.75M3.75 21.75h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H3.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+              </svg>
+            </div>
+          ) : (
+            <div className="inline-flex bg-red-200 rounded p-1">
+              <h6 className="mr-1">private</h6>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+              </svg>
+            </div>
+          )}
+        </span>
       </div>
     </div>
   )

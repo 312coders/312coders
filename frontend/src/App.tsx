@@ -47,37 +47,42 @@ const router = createBrowserRouter([
         element: <Contact />
       },
       {
-        path: "/admin-posts",
-        element:
-          <ProtectedRoute>
-            <AdminPostsPage />
-          </ProtectedRoute>,
-        loader: async () => {
-          return await api.blog.getPosts();
-        },
-        action: async ({ request, params }) => {
-          console.log(request)
-          if (request.method === 'DELETE') {
-            const formData = await request.formData();
-            await api.blog.deletePost(formData.get('id')?.toString() ?? '');
-            return null;
+        path: "/blog",
+        children: [
+          {
+            path: "admin-posts",
+            element:
+              <ProtectedRoute>
+                <AdminPostsPage />
+              </ProtectedRoute>,
+            loader: async () => {
+              return await api.blog.getPosts();
+            },
+            action: async ({ request, params }) => {
+              console.log(request)
+              if (request.method === 'DELETE') {
+                const formData = await request.formData();
+                await api.blog.deletePost(formData.get('id')?.toString() ?? '');
+                return null;
+              }
+              return null;
+            },
+          },
+          {
+            path: "edit/:id",
+            element:
+              <ProtectedRoute>
+                <EditPage />
+              </ProtectedRoute>,
+            loader: async ({ params }) => {
+              if (params.id) {
+                return await api.blog.getPost(params.id ?? '');
+              } else {
+                return null;
+              }
+            },
           }
-          return null;
-        },
-      },
-      {
-        path: "/edit/:id",
-        element:
-          <ProtectedRoute>
-            <EditPage />
-          </ProtectedRoute>,
-        loader: async ({ params }) => {
-          if (params.id) {
-            return await api.blog.getPost(params.id ?? '');
-          } else {
-            return null;
-          }
-        },
+        ]
       }
     ]
   }

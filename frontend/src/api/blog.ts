@@ -6,6 +6,7 @@ interface IBlogPost {
   data?: {
     title?: string;
     content?: string;
+    isPublic?: boolean;
     dateCreated?: Timestamp;
     dateUpdated?: Timestamp;
     createdByUser?: Record<string, string>;
@@ -21,6 +22,7 @@ export class BlogPost {
   id: string | null;
   title: string | null;
   content: string | null;
+  isPublic: boolean;
   dateCreated: Date | null;
   dateUpdated: Date | null;
   createdByUser: Record<string, string> | null;
@@ -32,6 +34,7 @@ export class BlogPost {
     this.id = post?.id ?? null;
     this.title = post?.data?.title ?? null;
     this.content = post?.data?.content ?? null;
+    this.isPublic = post?.data?.isPublic ?? false;
     this.dateCreated = post?.data?.dateCreated?.toDate() ?? null;
     this.dateUpdated = post?.data?.dateUpdated?.toDate() ?? null;
     this.createdByUser = post?.data?.createdByUser ?? null;
@@ -105,6 +108,7 @@ export const blog = {
     await setDoc(doc(db, "blog-posts", blogContent.id), {
       title: blog.title ?? '',
       content: blogContent,
+      isPublic: false,
       dateCreated: Timestamp.now(),
       dateUpdated: Timestamp.now(),
       createdByUser: doc(db, 'users', firebaseAuth.currentUser.uid),
@@ -128,6 +132,7 @@ export const blog = {
     await setDoc(doc(db, "blog-posts", blog.id), {
       title: blog.title,
       dateUpdated: Timestamp.now(),
+      isPublic: blog.isPublic,
       updatedByUser: doc(db, 'users', firebaseAuth.currentUser.uid),
     }, { merge: true })
     await setDoc(doc(db, "blog-content", blog.id), {

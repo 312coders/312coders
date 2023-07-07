@@ -11,6 +11,7 @@ const EditPage = () => {
   const [post, setPost] = useState<BlogPost>(data);
   const navigate = useNavigate();
   const { setMsg } = useAlert();
+
   const saveBtnEnabled = () => {
     console.log(JSON.stringify(data) === JSON.stringify(post))
     return JSON.stringify(data) !== JSON.stringify(post)
@@ -22,18 +23,33 @@ const EditPage = () => {
 
   return (
     <div className="p-10 bg-gray-300 max-w-4xl m-auto">
-      <div className="mb-2 space-x-2">
-        <input
-          className=" border rounded py-2 px-3 text-gray-700"
-          id="title"
-          type="text"
-          placeholder="Title"
-          defaultValue={post.title ?? ''}
-          onInput={(e) => setPost((prevPost) => {
-            prevPost.title = e.currentTarget.value;
-            return prevPost;
-          })}
-        />
+      <div className="mb-2 space-x-4">
+        <label className="space-x-1 align-middle">
+          <span className="font-bold">title:</span>
+          <input
+            className=" border rounded py-2 px-3 text-gray-700"
+            id="title"
+            type="text"
+            placeholder="Title"
+            defaultValue={post.title ?? ''}
+            onInput={(e) => setPost((prevPost) => {
+              prevPost.title = e.currentTarget.value;
+              return prevPost;
+            })}
+          />
+        </label>
+        <label className="space-x-1 align-middle">
+          <span className="font-bold">public:</span>
+          <input
+            className="rounded-full h-5 w-5 align-middle"
+            type="checkbox"
+            defaultChecked={post.isPublic}
+            onChange={(e) => setPost((prevPost) => {
+              prevPost.isPublic = e.target.checked;
+              return prevPost;
+            })}
+          />
+        </label>
         <button
           className="bg-blue-500 hover:bg-blue-700 transition text-white font-bold py-2 px-4 rounded float-right"
           onClick={() => {
