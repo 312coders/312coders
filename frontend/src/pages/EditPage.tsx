@@ -1,42 +1,56 @@
-import { useEffect, useState } from "react";
-import { api } from "../api";
-import Editor from "../components/Editor";
-import { BlogPost } from "../api/blog";
 import DOMPurify from "dompurify";
-import { useParams, useNavigate } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
-
+import { useEffect, useState } from "react";
+import { useLoaderData, useNavigate, useSubmit } from "react-router-dom";
+import { api } from "../api";
+import { BlogPost } from "../api/blog";
+import Editor from "../components/Editor";
 
 const EditPage = () => {
-  const params = useParams();
-  const [post, setPost] = useState<BlogPost>(new BlogPost());
-
-  const { user, loading } = useAuth();
+  const data = useLoaderData() as BlogPost;
+  const [post, setPost] = useState<BlogPost>(data);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (loading) return;
-    if (!user) {
-      navigate('/');
-    }
-  }, [user, loading]);
-
-  useEffect(() => {
-    if (params.id) {
-      api.blog.getPost(params.id ?? '').then(res => {
-        console.log(res.content);
-        setPost(res);
-      });
-    }
-  }, [params])
   
-  if (!user || loading) {
-    return null;
+  const saveBtnEnabled = () => {
+    console.log(JSON.stringify(data) === JSON.stringify(post))
+    return JSON.stringify(data) !== JSON.stringify(post)
   }
 
+  useEffect(() => {
+    console.log(post)
+  }, [post])
+
   return (
-    <div className="p-4 m-4">
-      <div className="border-2 text-editor">
+    <div className="p-10 bg-gray-300 max-w-4xl m-auto">
+      <div className="mb-2 space-x-2">
+        <input
+          className=" border rounded py-2 px-3 text-gray-700"
+          id="title"
+          type="text"
+          placeholder="Title"
+          defaultValue={post.title ?? ''}
+          onInput={(e) => setPost((prevPost) => {
+            prevPost.title = e.currentTarget.value;
+            return prevPost;
+          })}
+        />
+        <button
+          className="bg-blue-500 hover:bg-blue-700 transition text-white font-bold py-2 px-4 rounded float-right"
+          onClick={() => {
+            api.blog.updatePost(post)
+          }}
+        >
+          save
+        </button>
+        <button
+          className="bg-gray-500 hover:bg-gray-700 transition text-white font-bold py-2 px-4 rounded float-right"
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
+          back
+        </button>
+      </div>
+      <div className="border-2 text-editor bg-white">
         <Editor
           value={post.content ?? ''}
           setValue={(value) => setPost((prevPost) => {
@@ -45,17 +59,9 @@ const EditPage = () => {
           })}
         />
       </div>
-      <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded float-right"
-        onClick={() => {
-          api.blog.updatePost(post)
-        }}
-      >
-        save
-      </button>
-      <div className='ql-snow'>
+      {/* <div className='ql-snow'>
         {<div className='ql-editor' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content ?? '') }} />}
-      </div>
+      </div> */}
     </div>
   )
 }
