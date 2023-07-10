@@ -8,11 +8,11 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminPostsPage from './pages/AdminPostsPage';
-import EditPage from './pages/EditPage';
+import PostEditPage from './pages/PostEditPage';
 import { api } from "./api";
 import { AlertContextProvider } from "./hooks/useAlert";
 import Alert from "./components/Alert";
-import PostPage from "./pages/PostPage";
+import PostPreviewPage from "./pages/PostPreviewPage";
 
 const Layout = () => {
   return (
@@ -64,7 +64,7 @@ const router = createBrowserRouter([
             path: "edit/:id",
             element:
               <ProtectedRoute>
-                <EditPage />
+                <PostEditPage />
               </ProtectedRoute>,
             loader: async ({ params }) => {
               if (params.id) {
@@ -76,7 +76,7 @@ const router = createBrowserRouter([
           },
           {
             path: "post/:id",
-            element: <PostPage />,
+            element: <PostPreviewPage />,
             loader: async ({ params }) => {
               if (params.id) {
                 return await api.blog.getPost(params.id ?? '');

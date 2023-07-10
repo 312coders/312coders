@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate, useRevalidator } from "react-router-dom";
 import { api } from "../api";
 import { BlogPost } from "../api/blog";
 import Editor from "../components/Editor";
@@ -7,18 +7,18 @@ import { useAlert } from "../hooks/useAlert";
 
 const EditPage = () => {
   const data = useLoaderData() as BlogPost;
-  const [post, setPost] = useState<BlogPost>(data);
+  const revalidator = useRevalidator();
+  const [post, setPost] = useState<BlogPost>(structuredClone(data));
+
   const navigate = useNavigate();
   const { setMsg } = useAlert();
 
-  const saveBtnEnabled = () => {
-    console.log(JSON.stringify(data) === JSON.stringify(post))
-    return JSON.stringify(data) !== JSON.stringify(post)
-  }
-
   useEffect(() => {
-    console.log(post)
-  }, [post])
+    console.log(revalidator.state)
+    if (revalidator.state === 'idle') {
+      setPost(structuredClone(data));
+    }
+  }, [revalidator.state]);
 
   return (
     <div className="p-10 bg-gray-300 max-w-4xl m-auto">
@@ -32,7 +32,7 @@ const EditPage = () => {
             placeholder="Title"
             defaultValue={post.title ?? ''}
             onInput={(e) => setPost((prevPost) => {
-              prevPost.title = e.currentTarget.value;
+              prevPost.title = e.currentTarget?.value ?? '';
               return prevPost;
             })}
           />
@@ -53,6 +53,7 @@ const EditPage = () => {
           className="bg-blue-500 hover:bg-blue-700 transition text-white font-bold py-2 px-4 rounded float-right"
           onClick={() => {
             api.blog.updatePost(post).then(() => {
+              revalidator.revalidate();
               setMsg('Post saved!', 'success');
             })
           }}

@@ -1,8 +1,7 @@
-import { useEffect } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
+import { api } from "../api";
 import { BlogPost } from "../api/blog";
 import BlogCard from "../components/BlogCard";
-import { api } from "../api";
 
 const AdminPostsPage = () => {
   const posts = useLoaderData() as BlogPost[];
