@@ -1,6 +1,5 @@
-import { Form, Link, useFetcher, useSubmit } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { BlogPost } from "../api/blog";
-import { api } from "../api";
 
 
 type Props = {
@@ -9,7 +8,6 @@ type Props = {
 
 const BlogCard = (props: Props) => {
   const { blogPost } = props;
-  const submit = useSubmit();
 
   return (
     <div className="p-4">

@@ -5,12 +5,8 @@ import BlogCard from "../components/BlogCard";
 import { api } from "../api";
 
 const AdminPostsPage = () => {
-  const data = useLoaderData() as BlogPost[];
+  const posts = useLoaderData() as BlogPost[];
   const navigate = useNavigate();
-
-  useEffect(() => {
-    console.log(data)
-  }, [])
 
   return (
     <div className="p-10 bg-gray-300 max-w-4xl m-auto">
@@ -26,7 +22,7 @@ const AdminPostsPage = () => {
         </button>
       </div>
       <ul className="space-y-2">
-        {data.map((post, i) => (
+        {posts.map((post) => (
           <li
             key={post.id}
             className="border-2 border-black rounded bg-white"

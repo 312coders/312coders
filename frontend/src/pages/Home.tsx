@@ -3,7 +3,6 @@ import Discord from "../components/Discord";
 import Community from "../components/Community";
 import Contact from "../components/Contact";
 import "./Home.css";
-import React from "react";
 
 function Home() {
   return (
