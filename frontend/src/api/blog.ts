@@ -57,7 +57,7 @@ export const blog = {
     } else {
       q = query(collection(db, "blog-posts"), orderBy("dateUpdated"), startAt(page * resultsPerPage), limit(resultsPerPage))
     }
-    const docs = (await getDocs<DocumentData>(q)).docs;
+    const docs = (await getDocs(q)).docs;
     return await Promise.all(docs.map(async doc => {
       let data = doc.data();
       if (data['createdByUser']) {
