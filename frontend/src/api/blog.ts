@@ -20,13 +20,10 @@ export const blog = {
     };
 
     const posts = await realmApp.currentUser
-      .mongoClient('mongodb-atlas').db('312coders').collection('blog-posts')
+      .mongoClient(import.meta.env.VITE_MONGO_CLUSTER_NAME).db(import.meta.env.VITE_MONGO_DB_NAME).collection('blog-posts')
       .find({} , {
         projection: {
           content: 0,
-        },
-        sort: {
-          _id: 1
         }
       })
     const blogPosts = await Promise.all(posts.map(async post => await new BlogPost().create(post)));
@@ -44,7 +41,7 @@ export const blog = {
     };
 
     const post = await realmApp.currentUser
-      .mongoClient('mongodb-atlas').db('312coders').collection('blog-posts')
+    .mongoClient(import.meta.env.VITE_MONGO_CLUSTER_NAME).db(import.meta.env.VITE_MONGO_DB_NAME).collection('blog-posts')
       .findOne({ _id: new ObjectId(id) });
     console.log(post, id)
     return await new BlogPost().create(post);
@@ -60,7 +57,7 @@ export const blog = {
     };
 
     const result = await realmApp.currentUser
-      .mongoClient('mongodb-atlas').db('312coders').collection('blog-posts')
+      .mongoClient(import.meta.env.VITE_MONGO_CLUSTER_NAME).db(import.meta.env.VITE_MONGO_DB_NAME).collection('blog-posts')
       .insertOne({
         title: blog.title ?? '',
         content: blog.content ?? '',
@@ -86,7 +83,7 @@ export const blog = {
     }
     console.log(blog.id)
     await realmApp.currentUser
-      .mongoClient('mongodb-atlas').db('312coders').collection('blog-posts')
+      .mongoClient(import.meta.env.VITE_MONGO_CLUSTER_NAME).db(import.meta.env.VITE_MONGO_DB_NAME).collection('blog-posts')
       .updateOne({ _id: new ObjectId(blog.id) }, {
         $set: {
           title: blog.title,
@@ -114,7 +111,7 @@ export const blog = {
 
     return await Promise.all([
       realmApp.currentUser
-        .mongoClient('mongodb-atlas').db('312coders').collection('blog-posts')
+        .mongoClient(import.meta.env.VITE_MONGO_CLUSTER_NAME).db(import.meta.env.VITE_MONGO_DB_NAME).collection('blog-posts')
         .deleteOne({ _id: new ObjectId(id) }),
       ...urls.map((url) => api.storage.deleteImage(url))
     ])

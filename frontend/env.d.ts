@@ -8,6 +8,9 @@ interface ImportMetaEnv {
   readonly VITE_FIREBASE_MESSAGE_SENDER_ID: string,
   readonly VITE_FIREBASE_APP_ID: string,
   readonly VITE_FIREBASE_MEASUREMENT_ID: string,
+  readonly VITE_MONGO_REALM_APP_ID: string,
+  readonly VITE_MONGO_CLUSTER_NAME: string,
+  readonly VITE_MONGO_DB_NAME: string,
 }
 
 interface ImportMeta {

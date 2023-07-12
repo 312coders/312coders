@@ -29,7 +29,7 @@ export const firestoreDB = getFirestore(firebaseApp);
 export const firebaseStorage = getStorage(firebaseApp);
 export const analytics = getAnalytics(firebaseApp);
 
-export const realmApp = new Realm.App({ id: 'web-app-fiqzw' });
+export const realmApp = new Realm.App({ id: import.meta.env.VITE_MONGO_REALM_APP_ID });
 
 export const api = {
   auth,
