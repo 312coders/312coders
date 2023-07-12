@@ -11,7 +11,7 @@ const useAuth = () => {
     const unsub = firebaseAuth.onAuthStateChanged((user) => {
       setUser(user);
       setLoading(false);
-    })
+    });
 
     return () => {
       unsub();

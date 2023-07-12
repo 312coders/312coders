@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useLoaderData, useNavigate, useRevalidator } from "react-router-dom";
 import { api } from "../api";
-import { BlogPost } from "../api/blog";
+import { BlogPost } from "../models/blogPost";
 import Editor from "../components/Editor";
 import { useAlert } from "../hooks/useAlert";
 import Chip from "../components/Chip";
@@ -17,6 +17,7 @@ const EditPage = () => {
 
   useEffect(() => {
     console.log(revalidator.state)
+    console.log(post)
     if (revalidator.state === 'idle') {
       setPost(structuredClone(data));
     }

@@ -9,6 +9,8 @@ import { auth } from './auth';
 import { blog } from './blog';
 import { storage } from './storage';
 
+import * as Realm from "realm-web";
+
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -20,12 +22,14 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-export const app = initializeApp(firebaseConfig);
+export const firebaseApp = initializeApp(firebaseConfig);
 
-export const firebaseAuth = getAuth(app);
-export const db = getFirestore(app);
-export const firebaseStorage = getStorage(app);
-export const analytics = getAnalytics(app);
+export const firebaseAuth = getAuth(firebaseApp);
+export const firestoreDB = getFirestore(firebaseApp);
+export const firebaseStorage = getStorage(firebaseApp);
+export const analytics = getAnalytics(firebaseApp);
+
+export const realmApp = new Realm.App({ id: 'web-app-fiqzw' });
 
 export const api = {
   auth,

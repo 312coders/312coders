@@ -15,7 +15,7 @@ import Alert from "./components/Alert";
 import PostPreviewPage from "./pages/PostPreviewPage";
 
 const Layout = () => {
-  return (
+    return (
     <AlertContextProvider>
       <Navbar />
       <main>

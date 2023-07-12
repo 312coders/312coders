@@ -1,12 +1,14 @@
 import {
   User,
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut as signOutFirebase,
   sendPasswordResetEmail as sendPasswordResetEmailFirebase,
+  signInWithEmailAndPassword,
+  signOut as signOutFirebase
 } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
-import { db, firebaseAuth } from ".";
+import * as Realm from "realm-web";
+import { firebaseAuth, realmApp } from ".";
+
+// https://levelup.gitconnected.com/how-to-use-firebase-authentication-with-mongodb-realm-the-easy-way-5b85c8532000
 
 export const auth = {
   /**
@@ -23,6 +25,7 @@ export const auth = {
       email,
       password
     );
+    await realmApp.logIn(Realm.Credentials.jwt(await userCredential.user.getIdToken()));
     return userCredential.user;
   },
 
@@ -40,6 +43,8 @@ export const auth = {
       email,
       password
     );
+    await realmApp.logIn(Realm.Credentials.jwt(await userCredential.user.getIdToken()));
+    console.log(userCredential.user, realmApp.currentUser);
     return userCredential.user;
   },
 
@@ -49,7 +54,7 @@ export const auth = {
    * @returns {Promise<void>}
    */
   signOut: async (): Promise<void> => {
-    return await signOutFirebase(firebaseAuth);
+    await Promise.all([signOutFirebase(firebaseAuth), realmApp.currentUser?.logOut()]);
   },
 
   /**

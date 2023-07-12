@@ -86,7 +86,7 @@ function About() {
           </a>
         </div>
         <MapContainer
-          className="h-screen"
+          className="h-screen z-0"
           center={[41.8781, -87.6298]}
           zoom={10}
           scrollWheelZoom={false}

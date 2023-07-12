@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom";
-import { BlogPost } from "../api/blog";
+import { Await, Link } from "react-router-dom";
+import { BlogPost } from "../models/blogPost";
+import { User } from "../models/user";
 
 
 type Props = {
@@ -19,10 +20,13 @@ const BlogCard = (props: Props) => {
       </h2>
       <div>
         <p>
-          created by: <i>{blogPost.createdByUser?.email}</i> on <i>{blogPost.dateCreated?.toLocaleString()}</i>
+          owner: <i>{blogPost.owner?.email}</i>
         </p>
         <p>
-          last edited by: <i>{blogPost.updatedByUser?.email}</i> on <i>{blogPost.dateUpdated?.toLocaleString()}</i>
+          created on <i>{blogPost.dateCreated?.toLocaleString()}</i>
+        </p>
+        <p>
+          last edited on <i>{blogPost.dateUpdated?.toLocaleString()}</i>
         </p>
       </div>
       <div className="container mt-2 space-x-2">

@@ -22,8 +22,12 @@ export const storage = {
   },
 
   deleteImage: async (path: string) => {
-    const blogImagesRef = ref(firebaseStorage, 'blog-images');
-    const imageRef = ref(blogImagesRef, path);
-    return await deleteObject(imageRef);
+    try {
+      const blogImagesRef = ref(firebaseStorage, 'blog-images');
+      const imageRef = ref(blogImagesRef, path);
+      return await deleteObject(imageRef);
+    } catch (error) {
+      throw error;
+    }
   }
 };

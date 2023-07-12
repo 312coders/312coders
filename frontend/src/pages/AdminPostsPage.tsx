@@ -1,6 +1,6 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { api } from "../api";
-import { BlogPost } from "../api/blog";
+import { BlogPost } from "../models/blogPost";
 import BlogCard from "../components/BlogCard";
 
 const AdminPostsPage = () => {
