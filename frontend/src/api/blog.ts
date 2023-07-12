@@ -1,4 +1,4 @@
-import { DocumentData, DocumentReference, Query, Timestamp, addDoc, collection, deleteDoc, doc, getDoc, getDocs, limit, orderBy, query, setDoc, startAt } from "firebase/firestore";
+import { DocumentData, Query, Timestamp, addDoc, collection, deleteDoc, doc, getDoc, getDocs, limit, orderBy, query, setDoc, startAt } from "firebase/firestore";
 import { api, db, firebaseAuth } from ".";
 
 interface IBlogPost {
@@ -6,10 +6,12 @@ interface IBlogPost {
   data?: {
     title?: string;
     content?: string;
+    isPublic?: boolean;
+    tags?: string[];
     dateCreated?: Timestamp;
     dateUpdated?: Timestamp;
-    createdByUser?: DocumentReference;
-    updatedByUser?: DocumentReference;
+    createdByUser?: Record<string, string>;
+    updatedByUser?: Record<string, string>;
   }
 }
 
@@ -21,10 +23,12 @@ export class BlogPost {
   id: string | null;
   title: string | null;
   content: string | null;
+  isPublic: boolean;
+  tags: string[];
   dateCreated: Date | null;
   dateUpdated: Date | null;
-  createdByUser: DocumentReference | null;
-  updatedByUser: DocumentReference | null;
+  createdByUser: Record<string, string> | null;
+  updatedByUser: Record<string, string> | null;
 
   constructor();
   constructor(post: IBlogPost)
@@ -32,6 +36,8 @@ export class BlogPost {
     this.id = post?.id ?? null;
     this.title = post?.data?.title ?? null;
     this.content = post?.data?.content ?? null;
+    this.isPublic = post?.data?.isPublic ?? false;
+    this.tags = post?.data?.tags ?? [];
     this.dateCreated = post?.data?.dateCreated?.toDate() ?? null;
     this.dateUpdated = post?.data?.dateUpdated?.toDate() ?? null;
     this.createdByUser = post?.data?.createdByUser ?? null;
@@ -54,7 +60,7 @@ export const blog = {
     } else {
       q = query(collection(db, "blog-posts"), orderBy("dateUpdated"), startAt(page * resultsPerPage), limit(resultsPerPage))
     }
-    const docs = (await getDocs<DocumentData>(q)).docs;
+    const docs = (await getDocs(q)).docs;
     return await Promise.all(docs.map(async doc => {
       let data = doc.data();
       if (data['createdByUser']) {
@@ -78,8 +84,8 @@ export const blog = {
     if (!post || !data) {
       throw new Error('Could not get post');
     }
-    for (const fieldName of ['createdByUser', 'updatedByUser', 'blog-content']) {
-      if (fieldName === 'blog-content') {
+    for (const fieldName of ['createdByUser', 'updatedByUser', 'content']) {
+      if (fieldName === 'content') {
         const blogContent = (await getDoc(data[fieldName])).data() as Record<string, string>;
         data['content'] = blogContent['content'];
       } else if (data[fieldName]) {
@@ -94,21 +100,26 @@ export const blog = {
    * 
    * @param {BlogPost} blog 
    */
-  createPost: async (blog: BlogPost) => {
+  createPost: async (blog: BlogPost): Promise<string> => {
     if (!firebaseAuth.currentUser) {
       throw new Error('Not authenticated');
     };
     const blogContent = await addDoc(collection(db, "blog-content"), {
-      content: blog.content,
+      content: blog.content ?? '',
     });
-    return await setDoc(doc(db, "blog-posts", blogContent.id), {
-      title: blog.title,
+    
+    await setDoc(doc(db, "blog-posts", blogContent.id), {
+      title: blog.title ?? '',
       content: blogContent,
+      isPublic: false,
+      tags: [],
       dateCreated: Timestamp.now(),
       dateUpdated: Timestamp.now(),
       createdByUser: doc(db, 'users', firebaseAuth.currentUser.uid),
       updatedByUser: doc(db, 'users', firebaseAuth.currentUser.uid),
     });
+
+    return blogContent.id;
   },
 
   /**
@@ -125,6 +136,8 @@ export const blog = {
     await setDoc(doc(db, "blog-posts", blog.id), {
       title: blog.title,
       dateUpdated: Timestamp.now(),
+      isPublic: blog.isPublic,
+      tags: blog.tags,
       updatedByUser: doc(db, 'users', firebaseAuth.currentUser.uid),
     }, { merge: true })
     await setDoc(doc(db, "blog-content", blog.id), {
@@ -146,7 +159,7 @@ export const blog = {
     while (url = regx.exec(content)) {
       urls.push(url[1]);
     }
-    
+    console.log(urls)
     // delete the blog-posts and blog-content entry, but also delete the images
     return await Promise.all([
       deleteDoc(doc(db, 'blog-posts', id)),

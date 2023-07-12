@@ -76,9 +76,6 @@ type EditorProps = {
 }
 
 const Editor = forwardRef((props: EditorProps, _ref) => {
-  useEffect(() => {
-    console.log(props.value)
-  }, [props])
   return (
     <ReactQuill
       theme="snow"

@@ -1,13 +1,13 @@
-import About from "./About";
-import Discord from "./Discord";
-import Community from "./Community";
-import Contact from "./Contact";
+import About from "../components/About";
+import Discord from "../components/Discord";
+import Community from "../components/Community";
+import Contact from "../components/Contact";
 import "./Home.css";
 
 function Home() {
   return (
     <>
-      <div className="background-img flex flex-col md:flex-row md:space-x-3 py-10 border-4 border-t-red-500 max-w-4xl m-auto">
+      <div className="background-img center flex flex-col md:flex-row md:space-x-3 py-10 border-4 border-t-red-500 max-w-4xl m-auto">
         <div className="intro items-center justify-center md:w-1/2">
           <h1 className="welcome text-6xl font-extrabold text-center">
             Code,
