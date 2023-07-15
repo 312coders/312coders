@@ -20,7 +20,7 @@ function Home() {
           <img src="logo.png" alt="logo" />
         </div>
       </div>
-      <About />
+      {/* <About /> */}
       <Community />
       <Discord />
       <Contact />
