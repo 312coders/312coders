@@ -1,4 +1,3 @@
-import About from "./About";
 import Discord from "./Discord";
 import Community from "./Community";
 import Contact from "./Contact";
@@ -20,7 +19,6 @@ function Home() {
           <img src="logo.png" alt="logo" />
         </div>
       </div>
-      {/* <About /> */}
       <Community />
       <Discord />
       <Contact />
