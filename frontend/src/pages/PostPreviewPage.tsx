@@ -11,8 +11,15 @@ const PostPage = () => {
       <div>
         <h1 className="text-5xl">{post.title}</h1>
         <br/>
-        {/* <h2 className="italic text-sm">created by {post.createdByUser?.['first name']} {post.createdByUser?.['last name']} on {post.dateCreated?.toLocaleString()}</h2>
-        <h2 className="italic text-sm">updated by {post.updatedByUser?.['first name']} {post.updatedByUser?.['last name']} on {post.dateUpdated?.toLocaleString()}</h2> */}
+        <p>
+          <i>{post.owner?.name}</i>
+        </p>
+        <p>
+          created on <i>{post.dateCreated?.toLocaleString()}</i>
+        </p>
+        <p>
+          last edited on <i>{post.dateUpdated?.toLocaleString()}</i>
+        </p>
       </div>
       <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
       <div className='ql-snow'>

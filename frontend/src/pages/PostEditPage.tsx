@@ -17,8 +17,9 @@ const EditPage = () => {
 
   useEffect(() => {
     console.log(revalidator.state)
-    console.log(post)
+    
     if (revalidator.state === 'idle') {
+      console.log(data)
       setPost(structuredClone(data));
     }
   }, [revalidator.state]);
@@ -37,7 +38,7 @@ const EditPage = () => {
             id="title"
             type="text"
             placeholder="Title"
-            defaultValue={post.title ?? ''}
+            value={post.title ?? ''}
             onInput={(e) => {
               const prevPost = structuredClone(post);
               prevPost.title = e.currentTarget?.value ?? '';
@@ -50,7 +51,7 @@ const EditPage = () => {
           <input
             className="rounded-full h-5 w-5 align-middle"
             type="checkbox"
-            defaultChecked={post.isPublic}
+            checked={post.isPublic}
             onChange={(e) => {
               const prevPost = structuredClone(post);
               prevPost.isPublic = e.target.checked;
@@ -61,10 +62,16 @@ const EditPage = () => {
         <button
           className="bg-blue-500 hover:bg-blue-700 disabled:bg-gray-400 transition text-white font-bold py-2 px-4 rounded float-right"
           onClick={() => {
-            api.blog.updatePost(post).then(() => {
-              revalidator.revalidate();
-              setMsg('Post saved!', 'success');
-            })
+            api.blog.updatePost(post)
+              .then(() => {
+                setMsg('Post saved!', 'success');
+              })
+              .catch(() => {
+                setMsg('Could not save post!', 'error');
+              })
+              .finally(() => {
+                revalidator.revalidate();
+              });
           }}
           disabled={saveDisabled}
         >

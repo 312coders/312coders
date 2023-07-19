@@ -1,5 +1,5 @@
 import * as Realm from "realm-web";
-import { api, firebaseAuth, realmApp } from ".";
+import { api, collections, realmApp } from ".";
 import { BlogPost } from "../models/blogPost";
 const {
   BSON: { ObjectId },
@@ -8,57 +8,53 @@ const {
 
 export const blog = {
   /**
+   * Gets multiple posts
    * 
    * @param {number} page 
    * @param {number} resultsPerPage 
    * @returns 
    */
   getPosts: async (page?: number, resultsPerPage?: number) => {
-    console.log(realmApp.currentUser, firebaseAuth.currentUser)
-    if (!realmApp.currentUser) {
+    if (!collections.blogPosts) {
       throw new Error('Not authenticated');
     };
 
-    const posts = await realmApp.currentUser
-      .mongoClient(import.meta.env.VITE_MONGO_CLUSTER_NAME).db(import.meta.env.VITE_MONGO_DB_NAME).collection('blog-posts')
+    const posts = await collections.blogPosts
       .find({} , {
         projection: {
           content: 0,
         }
       })
-    const blogPosts = await Promise.all(posts.map(async post => await new BlogPost().create(post)));
-    return blogPosts
+    return await Promise.all(posts.map(async post => await new BlogPost().create(post)));
   },
 
   /**
+   * Gets a post by id
    * 
    * @param {string} id 
    * @returns 
    */
   getPost: async (id: string) => {
-    if (!realmApp.currentUser) {
+    if (!collections.blogPosts) {
       throw new Error('Not authenticated');
     };
 
-    const post = await realmApp.currentUser
-    .mongoClient(import.meta.env.VITE_MONGO_CLUSTER_NAME).db(import.meta.env.VITE_MONGO_DB_NAME).collection('blog-posts')
-      .findOne({ _id: new ObjectId(id) });
+    const post = await collections.blogPosts.findOne({ _id: new ObjectId(id) });
     console.log(post, id)
     return await new BlogPost().create(post);
   },
 
   /**
+   * Creates a new blog post, returns the id
    * 
    * @param {BlogPost} blog 
    */
   createPost: async (blog: BlogPost): Promise<string> => {
-    if (!realmApp.currentUser) {
+    if (!collections.blogPosts || !realmApp.currentUser) {
       throw new Error('Not authenticated');
     };
 
-    const result = await realmApp.currentUser
-      .mongoClient(import.meta.env.VITE_MONGO_CLUSTER_NAME).db(import.meta.env.VITE_MONGO_DB_NAME).collection('blog-posts')
-      .insertOne({
+    const result = await collections.blogPosts.insertOne({
         title: blog.title ?? '',
         content: blog.content ?? '',
         isPublic: false,
@@ -71,20 +67,19 @@ export const blog = {
   },
 
   /**
+   * Updates a blog post
    * 
    * @param {BlogPost} blog 
    */
   updatePost: async (blog: BlogPost) => {
-    if (!realmApp.currentUser) {
+    if (!collections.blogPosts) {
       throw new Error('Not authenticated');
     };
     if (!blog.id) {
       throw new Error("Blog post doesn't have an ID")
     }
     console.log(blog.id)
-    await realmApp.currentUser
-      .mongoClient(import.meta.env.VITE_MONGO_CLUSTER_NAME).db(import.meta.env.VITE_MONGO_DB_NAME).collection('blog-posts')
-      .updateOne({ _id: new ObjectId(blog.id) }, {
+    await collections.blogPosts.updateOne({ _id: new ObjectId(blog.id) }, {
         $set: {
           title: blog.title,
           content: blog.content,
@@ -95,8 +90,14 @@ export const blog = {
       })
   },
 
+  /**
+   * Deletes a post from MongoDB and any associated images from Firebase Storage
+   * 
+   * @param id 
+   * @returns 
+   */
   deletePost: async (id: string) => {
-    if (!realmApp.currentUser) {
+    if (!collections.blogPosts) {
       throw new Error('Not authenticated');
     };
 
@@ -110,9 +111,7 @@ export const blog = {
     }
 
     return await Promise.all([
-      realmApp.currentUser
-        .mongoClient(import.meta.env.VITE_MONGO_CLUSTER_NAME).db(import.meta.env.VITE_MONGO_DB_NAME).collection('blog-posts')
-        .deleteOne({ _id: new ObjectId(id) }),
+      collections.blogPosts.deleteOne({ _id: new ObjectId(id) }),
       ...urls.map((url) => api.storage.deleteImage(url))
     ])
   }

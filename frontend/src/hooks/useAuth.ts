@@ -7,6 +7,7 @@ const useAuth = () => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<User | null>(firebaseAuth.currentUser);
 
+  
   useEffect(() => {
     const unsub = firebaseAuth.onAuthStateChanged((user) => {
       setUser(user);

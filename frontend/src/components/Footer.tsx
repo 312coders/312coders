@@ -45,28 +45,28 @@ function Footer() {
           <span className="text-xs text-gray-300">312Coders © 2023</span>
           {user === null ? (
             <div className="space-x-1">
-              <input
-                className="text-xs border rounded py-2 px-3 text-gray-700"
-                id="email"
-                type="text"
-                placeholder="Email"
-                value={email}
-                onInput={(e) => setEmail(e.currentTarget.value)}
-              />
-              <input
-                className="text-xs border rounded py-2 px-3 text-gray-700"
-                id="password"
-                type="password"
-                placeholder="Password"
-                value={password}
-                onInput={(e) => setPassword(e.currentTarget.value)}
-              />
-              <button
-                className="text-xs bg-blue-500 hover:bg-blue-700 rounded p-2 font-bold"
-                onClick={() => api.auth.signIn(email, password)}
-              >
-                login
-              </button>
+                <input
+                  className="text-xs border rounded py-2 px-3 text-gray-700"
+                  id="email"
+                  type="text"
+                  placeholder="Email"
+                  value={email}
+                  onInput={(e) => setEmail(e.currentTarget.value)}
+                />
+                <input
+                  className="text-xs border rounded py-2 px-3 text-gray-700"
+                  id="password"
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onInput={(e) => setPassword(e.currentTarget.value)}
+                />
+                <button
+                  className="text-xs bg-blue-500 hover:bg-blue-700 rounded p-2 font-bold"
+                  onClick={() => api.auth.signIn(email, password)}
+                >
+                  login
+                </button>
               <button
                 className="text-xs bg-gray-500 hover:bg-gray-700 rounded p-2 font-bold"
                 onClick={handleForgotPassword}

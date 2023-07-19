@@ -1,5 +1,5 @@
 import {
-  User,
+  User as FirebaseUser,
   createUserWithEmailAndPassword,
   sendPasswordResetEmail as sendPasswordResetEmailFirebase,
   signInWithEmailAndPassword,
@@ -17,14 +17,15 @@ export const auth = {
    *
    * @param {string} email
    * @param {string} password
-   * @returns {Promise<User>}
+   * @returns {Promise<FirebaseUser>}
    */
-  signUp: async (email: string, password: string): Promise<User> => {
+  signUp: async (email: string, password: string): Promise<FirebaseUser> => {
     const userCredential = await createUserWithEmailAndPassword(
       firebaseAuth,
       email,
       password
     );
+    await auth.signOutAnonymous()
     await realmApp.logIn(Realm.Credentials.jwt(await userCredential.user.getIdToken()));
     return userCredential.user;
   },
@@ -37,12 +38,13 @@ export const auth = {
    * @param {string} password
    * @returns {Promise<User>}
    */
-  signIn: async (email: string, password: string): Promise<User> => {
+  signIn: async (email: string, password: string): Promise<FirebaseUser> => {
     const userCredential = await signInWithEmailAndPassword(
       firebaseAuth,
       email,
       password
     );
+    await auth.signOutAnonymous();
     await realmApp.logIn(Realm.Credentials.jwt(await userCredential.user.getIdToken()));
     console.log(userCredential.user, realmApp.currentUser);
     return userCredential.user;
@@ -54,15 +56,46 @@ export const auth = {
    * @returns {Promise<void>}
    */
   signOut: async (): Promise<void> => {
-    await Promise.all([signOutFirebase(firebaseAuth), realmApp.currentUser?.logOut()]);
+    await Promise.all([auth.signOutAnonymous(), signOutFirebase(firebaseAuth), realmApp.currentUser?.logOut()]);
+  },
+
+  /**
+   * Signs into an anonymous session for Realm
+   * 
+   * @returns {Promise<Realm.User>}
+   */
+  signInAnonymous: async (): Promise<Realm.User> => {
+    if (realmApp.currentUser?.providerType === 'custom-token') {
+      console.log('using firebase user session');
+      return realmApp.currentUser;
+    }
+    if (realmApp.currentUser?.providerType === 'anon-user') {
+      console.log('using existing anonymous session');
+      return realmApp.currentUser;
+    }
+    const user = await realmApp.logIn(Realm.Credentials.anonymous());
+    console.log('logged in anonymously');
+    return user;
+  },
+
+  /**
+   * Signs out of anonymous session for Realm
+   * 
+   * @returns {Promise<void>}
+   */
+  signOutAnonymous: async (): Promise<void> => {
+    if (realmApp.currentUser?.providerType === 'anon-user') {
+      await realmApp.removeUser(realmApp.currentUser);
+      console.log('signed out anonymous user');
+    }
   },
 
   /**
    * Gets the current user
    *
-   * @returns {User}
+   * @returns {FirebaseUser}
    */
-  currentUser: (): User | null => firebaseAuth.currentUser,
+  currentUser: (): FirebaseUser | null => firebaseAuth.currentUser,
 
   /**
    * Sends a password reset email to the specified email address

@@ -9,7 +9,7 @@ import Footer from "./components/Footer";
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminPostsPage from './pages/AdminPostsPage';
 import PostEditPage from './pages/PostEditPage';
-import { api } from "./api";
+import { api, realmApp } from "./api";
 import { AlertContextProvider } from "./hooks/useAlert";
 import Alert from "./components/Alert";
 import PostPreviewPage from "./pages/PostPreviewPage";
@@ -30,6 +30,12 @@ const Layout = () => {
 const router = createBrowserRouter([
   {
     element: <Layout />,
+    loader: async () => {
+      if (realmApp.currentUser?.providerType !== 'custom-token') {
+        return await api.auth.signInAnonymous();
+      }
+      return null;
+    },
     children: [
       {
         path: "/",
@@ -54,7 +60,7 @@ const router = createBrowserRouter([
             path: "admin-posts",
             element:
               <ProtectedRoute>
-                <AdminPostsPage />
+                <AdminPostsPage />,
               </ProtectedRoute>,
             loader: async () => {
               return await api.blog.getPosts();
@@ -64,7 +70,7 @@ const router = createBrowserRouter([
             path: "edit/:id",
             element:
               <ProtectedRoute>
-                <PostEditPage />
+                <PostEditPage />,
               </ProtectedRoute>,
             loader: async ({ params }) => {
               if (params.id) {

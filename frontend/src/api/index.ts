@@ -1,6 +1,5 @@
 
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
 import { getStorage } from "firebase/storage";
@@ -25,14 +24,19 @@ const firebaseConfig = {
 export const firebaseApp = initializeApp(firebaseConfig);
 
 export const firebaseAuth = getAuth(firebaseApp);
-export const firestoreDB = getFirestore(firebaseApp);
 export const firebaseStorage = getStorage(firebaseApp);
 export const analytics = getAnalytics(firebaseApp);
 
+// Initialize Realm
 export const realmApp = new Realm.App({ id: import.meta.env.VITE_MONGO_REALM_APP_ID });
 
 export const api = {
   auth,
   blog,
   storage
+};
+
+export const collections = {
+  blogPosts: realmApp?.currentUser?.mongoClient(import.meta.env.VITE_MONGO_CLUSTER_NAME).db(import.meta.env.VITE_MONGO_DB_NAME).collection('blog-posts'),
+  users: realmApp?.currentUser?.mongoClient(import.meta.env.VITE_MONGO_CLUSTER_NAME).db(import.meta.env.VITE_MONGO_DB_NAME).collection('users')
 };

@@ -1,5 +1,5 @@
 import * as Realm from "realm-web";
-import { realmApp } from "../api";
+import { collections } from "../api";
 import { User } from "./user";
 
 const {
@@ -59,10 +59,7 @@ export class BlogPost {
   }
 
   async setOwner() {
-    const result = await realmApp.currentUser
-      ?.mongoClient('mongodb-atlas').db('312coders').collection('users')
-      .findOne({ _id: this.owner_id });
-    console.log(result);
+    const result = await collections.users?.findOne({ _id: new ObjectId(this.owner_id) });
     this.owner = new User(result);
   }
 }
