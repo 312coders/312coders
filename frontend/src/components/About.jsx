@@ -53,6 +53,11 @@ const markers = [
     geocode: [41.979858, -87.680458],
     popUp: "Spiteful Brewing Tap Room",
   },
+  {
+    geocode: [41.969890, -87.862270],
+    popUp: "Shortfuse Brewery",
+  },
+
 ];
 
 const customIcon = new Icon({
