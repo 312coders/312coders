@@ -57,6 +57,10 @@ const markers = [
     geocode: [41.969890, -87.862270],
     popUp: "Shortfuse Brewery",
   },
+  {
+    geocode: [41.9758188, -87.6685536],
+    popUp: "Hopleaf",
+  },
 
 ];
 
