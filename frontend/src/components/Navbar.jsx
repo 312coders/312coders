@@ -1,5 +1,3 @@
-// import React from "react";
-//import "./Navbar.css";
 import { Link } from "react-router-dom";
 import Hamburger from "./Hamburger";
 import "./Navbar.css";
@@ -16,10 +14,9 @@ function Navbar() {
   const closeMobileMenu = () => setHamburgerOpen(false);
 
   const showButton = () => {
-    if (window.innerWidth <= 960) {
-      setButton(false);
-    } else {
-      setButton(true);
+    if (window.innerWidth <= 768) {
+      setHamburgerOpen(false);
+
     }
   };
 
@@ -39,46 +36,48 @@ function Navbar() {
     <>
       <nav>
         <div className="navbar bg-dark-blue text-white pb-3  max-w-4xl m-auto">
-          <div>
-            <ul className="flex justify-center md:justify-end md:text-xl max-w-4xl mx-auto px-7 items-center ">
-              <li className="mr-10 mt-5">
-                <Link
-                  to="/"
-                  className="hover:text-red-500 transition duration-500"
-                  onClick={toggleHamburger}
-                >
-                  Home
-                </Link>
-              </li>
-              <li className="mr-10 mt-5">
-                <Link
-                  to="/about"
-                  className="hover:text-red-500 transition duration-500"
-                  onClick={closeMobileMenu}
-                >
-                  About
-                </Link>
-              </li>
-              <li className="mr-10 mt-5">
-                <Link
-                  to="/community"
-                  className="hover:text-red-500 transition duration-500"
-                  onClick={closeMobileMenu}
-                >
-                  Community
-                </Link>
-              </li>
-              <li className="mr-10 mt-5">
-                <Link
-                  to="/contact"
-                  className="hover:text-red-500 transition duration-500"
-                  onClick={closeMobileMenu}
-                >
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
+          {!hamburgerOpen && (
+            <div>
+              <ul className="flex justify-center md:justify-end md:text-xl max-w-4xl mx-auto px-7 items-center nav-list">
+                <li className="mr-10 mt-5">
+                  <Link
+                    to="/"
+                    className="hover:text-red-500 transition duration-500"
+                    onClick={closeMobileMenu}
+                  >
+                    Home
+                  </Link>
+                </li>
+                <li className="mr-10 mt-5">
+                  <Link
+                    to="/about"
+                    className="hover:text-red-500 transition duration-500"
+                    onClick={closeMobileMenu}
+                  >
+                    About
+                  </Link>
+                </li>
+                <li className="mr-10 mt-5">
+                  <Link
+                    to="/community"
+                    className="hover:text-red-500 transition duration-500"
+                    onClick={closeMobileMenu}
+                  >
+                    Community
+                  </Link>
+                </li>
+                <li className="mr-10 mt-5">
+                  <Link
+                    to="/contact"
+                    className="hover:text-red-500 transition duration-500"
+                    onClick={closeMobileMenu}
+                  >
+                    Contact
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          )}
           <div className="Hamburger" onClick={toggleHamburger}>
             <Hamburger />
           </div>
