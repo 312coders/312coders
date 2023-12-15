@@ -38,9 +38,9 @@ function Navbar() {
   return (
     <>
       <nav>
-        <div className="navbar bg-dark-blue text-white pb-3  max-w-4xl m-auto">
+        <div className="navbar bg-dark-blue text-white pb-3">
           <div>
-            <ul className="flex justify-center md:justify-end md:text-xl max-w-4xl mx-auto px-7 items-center ">
+            <ul className="flex justify-center md:justify-end md:text-xl mx-auto px-7 items-center ">
               <li className="mr-10 mt-5">
                 <Link
                   to="/"
