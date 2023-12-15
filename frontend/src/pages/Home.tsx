@@ -1,7 +1,7 @@
 import About from "../components/About";
 import Discord from "../components/Discord";
 import Community from "../components/Community";
-import Contact from "../components/Contact";
+// import Contact from "../components/Contact";
 import "./Home.css";
 
 function Home() {
@@ -22,7 +22,7 @@ function Home() {
       </div>
       <Community />
       <Discord />
-      <Contact />
+      {/* <Contact /> */}
     </>
   );
 }

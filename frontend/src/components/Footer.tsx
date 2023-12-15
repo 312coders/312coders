@@ -36,7 +36,7 @@ function Footer() {
   return (
     <footer className="bg-gray-800 py-4 px-8 max-w-4xl m-auto">
       <div className="container mx-auto flex justify-between items-center">
-        <div className="text-white flex items-center">
+        {/* <div className="text-white flex items-center">
           <img
             src={Logo}
             className="block object-scale-down rounded h-14 mr-2"
@@ -89,7 +89,7 @@ function Footer() {
               </button>
             </div>
           )}
-        </div>
+        </div> */}
         <div className="text-white flex">
           <a
             href="https://www.twitter.com/312coders"
