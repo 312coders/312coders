@@ -1,5 +1,3 @@
-// import React from "react";
-//import "./Navbar.css";
 import { Link } from "react-router-dom";
 // import Hamburger from "./Hamburger";
 import "./Navbar.css";
@@ -16,10 +14,9 @@ function Navbar() {
   const closeMobileMenu = () => setHamburgerOpen(false);
 
   const showButton = () => {
-    if (window.innerWidth <= 960) {
-      setButton(false);
-    } else {
-      setButton(true);
+    if (window.innerWidth <= 768) {
+      setHamburgerOpen(false);
+
     }
   };
 
@@ -38,6 +35,7 @@ function Navbar() {
   return (
     <>
       <nav>
+
         <div className="navbar bg-dark-blue text-white pb-3">
           <div>
             <ul className="flex justify-center md:justify-end md:text-xl mx-auto px-7 items-center ">
@@ -71,6 +69,7 @@ function Navbar() {
             </ul>
           </div>
           {/* <div className="Hamburger" onClick={toggleHamburger}>
+
             <Hamburger />
           </div> */}
         </div>

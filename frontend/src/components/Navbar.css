@@ -1,11 +1,10 @@
-.nav-list {
-  display: none;
+.navbar {
+  display: block;
+  padding: 0.2rem;
 }
 
-.nav-list.show {
-  display: inline;
-}
-
-.nav-list.hide {
-  display: none;
+@media (max-width: 768px) {
+  ul .nav-list {
+    display: none;
+  }
 }
