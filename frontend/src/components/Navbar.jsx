@@ -1,7 +1,7 @@
 // import React from "react";
 //import "./Navbar.css";
 import { Link } from "react-router-dom";
-import Hamburger from "./Hamburger";
+// import Hamburger from "./Hamburger";
 import "./Navbar.css";
 import { useState, useEffect } from "react";
 
@@ -9,9 +9,9 @@ function Navbar() {
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
   const [button, setButton] = useState(true);
 
-  const toggleHamburger = () => {
-    setHamburgerOpen(!hamburgerOpen);
-  };
+  // const toggleHamburger = () => {
+  //   setHamburgerOpen(!hamburgerOpen);
+  // };
 
   const closeMobileMenu = () => setHamburgerOpen(false);
 
@@ -45,7 +45,7 @@ function Navbar() {
                 <Link
                   to="/"
                   className="hover:text-red-500 transition duration-500"
-                  onClick={toggleHamburger}
+                  // onClick={toggleHamburger}
                 >
                   Home
                 </Link>
@@ -68,20 +68,11 @@ function Navbar() {
                   Community
                 </Link>
               </li>
-              <li className="mr-10 mt-5">
-                <Link
-                  to="/contact"
-                  className="hover:text-red-500 transition duration-500"
-                  onClick={closeMobileMenu}
-                >
-                  Contact
-                </Link>
-              </li>
             </ul>
           </div>
-          <div className="Hamburger" onClick={toggleHamburger}>
+          {/* <div className="Hamburger" onClick={toggleHamburger}>
             <Hamburger />
-          </div>
+          </div> */}
         </div>
       </nav>
     </>
