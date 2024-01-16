@@ -61,6 +61,14 @@ const markers = [
     geocode: [41.9758188, -87.6685536],
     popUp: "Hopleaf",
   },
+  {
+    geocode: [41.9177233, -87.6988825],
+    popUp: "Bungalow by Middle Brow",
+  },
+  {
+    geocode: [41.9538493, -87.7342629],
+    popUp: "ERIS Brewery and Cider House",
+  },
 
 ];
 
