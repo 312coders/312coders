@@ -2,6 +2,7 @@ import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import About from "./components/About";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
+import Discord from "./components/Discord";
 
 import Community from "./components/Community";
 import Contact from "./components/Contact";
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "/community",
         element: <Community />
+      },
+      {
+        path: "/discord",
+        element: <Discord />
       },
       {
         path: "/contact",

@@ -3,6 +3,7 @@ import "leaflet/dist/leaflet.css";
 import { Icon, divIcon, point } from "leaflet";
 import pinIcon from "/marker-icon.png";
 import MarkerClusterGroup from "react-leaflet-cluster";
+import Photo from "./PhotoGrid";
 
 const markers = [
   {
@@ -81,10 +82,23 @@ const createCustomClusterIcon = (cluster) => {
 function About() {
   return (
     <>
-      <div className="bg-gray-300 py-20 px-10 max-w-4xl m-auto">
-        <h2 className="text-center text-4xl text-mid-blue font-bold">
+      <div className="bg-white py-10 px-4 md:px-20">
+        <h2 className="text-center font-semibold text-3xl pb-5">
           About Us
         </h2>
+        <div className="p-5 text-center">
+          <h3 className="text-2xl ">
+            We are a collective of technology enthusiasts based in the
+            Chicagoland area, coming together to collaborate on and engage in
+            discussions about various tech-related topics, all while taking the
+            opportunity to explore the city!
+          </h3>
+          <br />
+          <h3 className="text-2xl">
+            Check out all the places we&rsquo;ve been to so far!
+          </h3>
+          <br />
+        </div>
         <MapContainer
           className="h-screen"
           center={[41.8781, -87.6298]}
@@ -106,6 +120,37 @@ function About() {
             ))}
           </MarkerClusterGroup>
         </MapContainer>
+        <br></br>
+        <Photo />
+        <br></br>
+        <br></br>
+        <br></br>
+        <div className="text-center font-semibold text-3xl pb-5">
+  <h3 className="text-center text-4xl text-mid-blue font-bold">Volunteers</h3>
+</div>
+<div className="flex flex-wrap justify-center items-center space-x-4 pb-4 text-2xl">
+  <a href="https://github.com/Michaeljaurigue" className="block mb-2 hover:text-red-500">
+    <p className="hover:text-blue-800">Michael Jaurigue</p>
+  </a>
+  <a href="https://github.com/EmmeRox" className="block mb-2 hover:text-red-500">
+    <p className="hover:text-blue-800">Emmeline Ocampo</p>
+  </a>
+  <a href="https://github.com/kevinpan47" className="block mb-2 hover:text-red-500">
+    <p className="hover:text-blue-800">Kevin Pan</p>
+  </a>
+  <a href="https://github.com/mayamauchi" className="block mb-2 hover:text-red-500">
+    <p className="hover:text-blue-800">Maaya Yamauchi</p>
+  </a>
+  <a href="https://github.com/zachhollow" className="block mb-2 hover:text-red-500">
+    <p className="hover:text-blue-800">Zach Holloway</p>
+  </a>
+  <a href="https://www.linkedin.com/in/sergendemir/" className="block mb-2 hover:text-red-500">
+    <p className="hover:text-blue-800">Sergen Demir</p>
+  </a>
+</div>
+
+
+        
 
         {/* <div className="columns-1 md:columns-3 p-5">
           <div className="p-5">
