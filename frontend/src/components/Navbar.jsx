@@ -66,6 +66,15 @@ function Navbar() {
                   Community
                 </Link>
               </li>
+              <li className="mr-10 mt-5">
+                <Link
+                  to="/discord"
+                  className="hover:text-red-500 transition duration-500"
+                  onClick={closeMobileMenu}
+                >
+                  Contact
+                </Link>
+              </li>
             </ul>
           </div>
           {/* <div className="Hamburger" onClick={toggleHamburger}>
