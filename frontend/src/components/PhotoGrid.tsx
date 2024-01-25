@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Modal from 'react-modal';
 
 function PhotoGrid() {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-  const openModal = (image) => {
+  const openModal = (image: string) => {
     setSelectedImage(image);
     setModalIsOpen(true);
   };
@@ -18,9 +18,9 @@ function PhotoGrid() {
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 relative z-10">
       {Array.from({ length: 4 }).map((_, index) => (
-        <div key={index} className="relative" onClick={() => openModal(`/public/photo${index + 1}.png`)}>
+        <div key={index} className="relative" onClick={() => openModal(`/photo${index + 1}.png`)}>
           <img
-            src={`/public/photo${index + 1}.png`}
+            src={`/photo${index + 1}.png`}
             alt={`Photo ${index + 1}`}
             className="w-full h-full object-cover rounded cursor-pointer"
           />
