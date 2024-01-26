@@ -90,7 +90,7 @@ const createCustomClusterIcon = (cluster) => {
 function About() {
   return (
     <>
-      <div className="bg-white py-10 px-4 md:px-20">
+      <div className="bg-white py-10 px-4 md:px-20 dark:bg-slate-800 dark:text-white">
         <h2 className="text-center font-semibold text-3xl pb-5">
           About Us
         </h2>

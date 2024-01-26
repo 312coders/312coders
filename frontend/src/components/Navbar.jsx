@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
 // import Hamburger from "./Hamburger";
 import "./Navbar.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
+import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
+import { IconContext } from "react-icons";
 
 function Navbar() {
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
   const [button, setButton] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
+  const [hoverState, setHoverState] = useState(false);
 
   // const toggleHamburger = () => {
   //   setHamburgerOpen(!hamburgerOpen);
@@ -32,13 +36,27 @@ function Navbar() {
     };
   }, []);
 
+  const iconColor = useMemo(() => {
+    if (hoverState) return '#ef4444';
+    else return 'white';
+  }, [hoverState]);
+
+  const toggleDarkMode = useCallback(() => {
+    setDarkMode(prevState => !prevState);
+  }, [setDarkMode]);
+
   return (
     <>
       <nav>
-
-        <div className="navbar bg-dark-blue text-white pb-3">
-          <div>
-            <ul className="flex justify-center md:justify-end md:text-xl mx-auto px-7 items-center ">
+        <div className="navbar bg-dark-blue flex md:justify-between px-7">
+          <button onMouseEnter={() => setHoverState(true)} onMouseLeave={() => setHoverState(false)} onClick={toggleDarkMode}>
+            <IconContext.Provider value={{ size: "3em", className: "transition duration-500", color: iconColor }}>
+              { !darkMode && <MdOutlineDarkMode /> }
+              { darkMode && <MdOutlineLightMode /> }
+            </IconContext.Provider>
+          </button>
+          <div className="pb-3 text-white w-full md:w-auto">
+            <ul className="flex justify-center items-center md:text-xl">
               <li className="mr-10 mt-5">
                 <Link
                   to="/"
