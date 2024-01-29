@@ -19,19 +19,18 @@ function Discord() {
             networking thrive. Expand your skills, connect with like-minded
             individuals, and be part of our growing community. Join us today!
           </p>
-        
         </div>  
         <div className="text-center">
-            <a
-              href="https://discord.gg/3QsqxxwKcP"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <button role="button" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Join Discord
-              </button>
-            </a>
-          </div>
+          <a
+            href="https://discord.gg/3QsqxxwKcP"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <button role="button" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              Join Discord
+            </button>
+          </a>
+        </div>
       </div>
     </>
   );

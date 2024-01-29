@@ -135,8 +135,8 @@ function About() {
         <br></br>
         <br></br>
         <div className="text-center font-semibold text-3xl pb-5">
-  <h3 className="text-center text-4xl text-mid-blue font-bold">Volunteers</h3>
-</div>
+          <h3 className="text-center text-4xl text-mid-blue font-bold">Volunteers</h3>
+        </div>
 <div className="flex flex-wrap justify-center items-center space-x-4 pb-4 text-2xl">
   <a href="https://github.com/Michaeljaurigue" className="block mb-2 hover:text-red-500">
     <p className="hover:text-blue-800">Michael Jaurigue</p>
