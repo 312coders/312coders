@@ -29,32 +29,32 @@ function PhotoGrid() {
 
       {/* Modal */}
       <Modal
-  isOpen={modalIsOpen}
-  onRequestClose={closeModal}
-  contentLabel="Photo Modal"
-  style={{
-    overlay: {
-      backgroundColor: 'rgba(0, 0, 0, 0.75)',
-      zIndex: 1000,
-    },
-    content: {
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-      backgroundColor: 'white',
-      padding: '20px',
-      borderRadius: '8px',
-    },
-  }}
->
-  {selectedImage && (
-    <img src={selectedImage} alt="Selected Photo" className="w-full h-full object-contain" />
-  )}
-  <button onClick={closeModal} className="absolute top-4 right-4 text-black font-bold text-xl cursor-pointer">
-    X
-  </button>
-</Modal>
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Photo Modal"
+        style={{
+          overlay: {
+            backgroundColor: 'rgba(0, 0, 0, 0.75)',
+            zIndex: 1000,
+          },
+          content: {
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            backgroundColor: 'white',
+            padding: '20px',
+            borderRadius: '8px',
+          },
+        }}
+      >
+      {selectedImage && (
+        <img src={selectedImage} alt="Selected Photo" className="w-full h-full object-contain" />
+      )}
+        <button onClick={closeModal} className="absolute top-4 right-4 text-black font-bold text-xl cursor-pointer">
+          X
+        </button>
+      </Modal>
     </div>
   );
 }

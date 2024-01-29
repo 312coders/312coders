@@ -3,6 +3,10 @@
   padding: 0.2rem;
 }
 
+.toggleDark {
+  filter: invert(46%) sepia(48%) saturate(6434%) hue-rotate(337deg) brightness(97%) contrast(93%);
+}
+
 @media (max-width: 768px) {
   ul .nav-list {
     display: none;

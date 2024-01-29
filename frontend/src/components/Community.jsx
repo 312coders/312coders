@@ -3,7 +3,7 @@ import Photo from "./PhotoGrid";
 function Community() {
   return (
     <>
-      <div className="py-10 px-4 md:px-20 bg-light-blue">
+      <div className="py-10 px-4 md:px-20 bg-light-blue dark:bg-slate-800 dark:text-white">
         <h3 className="text-center font-semibold text-3xl pb-5">The 312 Coders Community</h3>
         <div className="mb-4 mx-auto max-w-screen-md">
           <img
