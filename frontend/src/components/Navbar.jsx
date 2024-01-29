@@ -8,8 +8,8 @@ import { IconContext } from "react-icons";
 function Navbar() {
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
   const [button, setButton] = useState(true);
-  const [darkMode, setDarkMode] = useState(false);
   const [hoverState, setHoverState] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => window.matchMedia('(prefers-color-scheme: dark)').matches);
 
   // const toggleHamburger = () => {
   //   setHamburgerOpen(!hamburgerOpen);
@@ -38,12 +38,17 @@ function Navbar() {
 
   const iconColor = useMemo(() => {
     if (hoverState) return '#ef4444';
-    else return 'white';
+      else return 'white';
   }, [hoverState]);
 
-  const toggleDarkMode = useCallback(() => {
-    setDarkMode(prevState => !prevState);
-  }, [setDarkMode]);
+  function toggleDarkMode () {
+    document.querySelector('html')?.classList.remove('dark');
+    
+    if (!darkMode) {
+      document.querySelector('html')?.classList.add('dark');
+      setDarkMode(true);
+    } else setDarkMode(false);
+  };
 
   return (
     <>

@@ -1,11 +1,11 @@
 function Discord() {
   return (
     <>
-      <div className="bg-white py-10 px-4 md:px-20">
+      <div className="bg-white py-10 px-4 md:px-20 dark:bg-slate-950 dark:text-white">
         <h3 className="text-center font-semibold text-3xl pb-5">Connect with the 312 on Discord</h3>
         <div className="mb-4 mx-auto max-w-screen-md">
           <img
-            src="/discord.jpg"
+            src="/discord_transparent.webp"
             className="block w-full h-auto rounded"
             alt="Discord Logo"
           />

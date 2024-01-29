@@ -17,7 +17,7 @@ function Home() {
           <h2 className="tag">Developing in the Chicagoland</h2>
         </div>
         <div className="flex items-center justify-center md:w-1/2">
-        <img src="logo.png" alt="logo" className="logo-pulse" />
+          <img src="logo.png" alt="logo" className="logo-pulse" />
         </div>
       </div>
       <Community />
