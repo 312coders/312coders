@@ -53,7 +53,7 @@ function Navbar() {
   return (
     <>
       <nav>
-        <div className="navbar bg-dark-blue flex md:justify-between px-7 border-b border-slate-600">
+        <div className="navbar flex md:justify-between px-7 border-b border-slate-600 bg-dark-blue dark:bg-slate-900">
           <button onMouseEnter={() => setHoverState(true)} onMouseLeave={() => setHoverState(false)} onClick={toggleDarkMode}>
             <IconContext.Provider value={{ size: "3em", className: "transition duration-500", color: iconColor }}>
               { !darkMode && <MdOutlineDarkMode /> }

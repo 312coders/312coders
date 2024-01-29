@@ -34,7 +34,7 @@ function Footer() {
   };
 
   return (
-    <footer className="bg-gray-800 py-4 px-8 border-t border-slate-600">
+    <footer className="py-4 px-8 border-t border-slate-600 bg-gray-800 dark:bg-gray-950">
       <div className="container mx-auto flex justify-between items-center">
         {/* <div className="text-white flex items-center">
           <img
