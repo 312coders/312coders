@@ -1,27 +1,50 @@
 import { Link } from "react-router-dom";
 // import Hamburger from "./Hamburger";
 import "./Navbar.css";
-import { useState, useEffect, useCallback, useMemo } from "react";
-import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
+import { useState, useEffect, useMemo, useCallback } from "react";
+import { MdOutlineDarkMode, MdOutlineLightMode, MdMenu, MdMenuOpen } from "react-icons/md";
 import { IconContext } from "react-icons";
 
 function Navbar() {
-  const [hamburgerOpen, setHamburgerOpen] = useState(false);
-  const [button, setButton] = useState(true);
-  const [hoverState, setHoverState] = useState(false);
+  // DARK MODE //
   const [darkMode, setDarkMode] = useState(() => window.matchMedia('(prefers-color-scheme: dark)').matches);
+  const [hoverDarkBtn, setHoverDarkBtn] = useState(false);
 
-  // const toggleHamburger = () => {
-  //   setHamburgerOpen(!hamburgerOpen);
-  // };
+  const darkBtnColor = useMemo(() => {
+    if (hoverDarkBtn) return '#ef4444';
+      else return 'white';
+  }, [hoverDarkBtn]);
 
-  const closeMobileMenu = () => setHamburgerOpen(false);
+  function toggleDarkMode () {
+    document.querySelector('html')?.classList.remove('dark');
+    
+    if (!darkMode) {
+      document.querySelector('html')?.classList.add('dark');
+      setDarkMode(true);
+    } else setDarkMode(false);
+  };
+
+  // MOBILE MENU (BURGER BUTTON) //
+  const [hamburgerOpen, setHamburgerOpen] = useState(false);
+  const [hoverBurgerBtn, setHoverBurgerBtn] = useState(false);
+  const [showBurger, setShowBurger] = useState(true);
+
+  const toggleHamburger = useCallback(() => {
+    setHamburgerOpen(prevState => !prevState);
+  }, []);
+
+  const closeMobileMenu = useCallback(() => {
+    setHamburgerOpen(false);
+  }, []);
 
   const showButton = () => {
-    if (window.innerWidth <= 768) {
-      setHamburgerOpen(false);
-
+    if (window.innerWidth <= 512) {
+      setShowBurger(true);
+    } else {
+      setShowBurger(false);
     }
+
+    setHamburgerOpen(false);
   };
 
   useEffect(() => {
@@ -36,32 +59,45 @@ function Navbar() {
     };
   }, []);
 
-  const iconColor = useMemo(() => {
-    if (hoverState) return '#ef4444';
+  const burgerBtnColor = useMemo(() => {
+    if (hoverBurgerBtn) return '#ef4444';
       else return 'white';
-  }, [hoverState]);
-
-  function toggleDarkMode () {
-    document.querySelector('html')?.classList.remove('dark');
-    
-    if (!darkMode) {
-      document.querySelector('html')?.classList.add('dark');
-      setDarkMode(true);
-    } else setDarkMode(false);
-  };
+  }, [hoverBurgerBtn]);
 
   return (
-    <>
-      <nav>
-        <div className="navbar flex md:justify-between px-7 border-b border-slate-600 bg-dark-blue dark:bg-slate-900">
-          <button onMouseEnter={() => setHoverState(true)} onMouseLeave={() => setHoverState(false)} onClick={toggleDarkMode}>
-            <IconContext.Provider value={{ size: "3em", className: "transition duration-500", color: iconColor }}>
+    <nav className="border-b border-slate-600 bg-dark-blue dark:bg-slate-900 flex justify-center h-16">
+      { showBurger && 
+        <div className="navbar flex justify-between items-center px-8 w-full max-w-96 h-full">
+          <Link to="/">
+            <img
+              alt='312 Coders Logo'
+              src='/logo_mobile.webp'
+              style={{width: 'auto', height: '48px', marginTop: 0}}
+            />
+          </Link>
+          <button
+            onMouseEnter={() => setHoverBurgerBtn(true)}
+            onMouseLeave={() => setHoverBurgerBtn(false)}
+            onClick={toggleHamburger}
+            className="flex justify-center items-center"
+          >
+            <IconContext.Provider value={{ size: "3em", className: "transition duration-500", color: burgerBtnColor }}>
+              { !hamburgerOpen && <MdMenu /> }
+              { hamburgerOpen && <MdMenuOpen /> }
+            </IconContext.Provider>
+          </button> 
+        </div>
+      }
+      { !showBurger && 
+        <div className="navbar flex justify-between items-center px-7 w-full h-full">
+          <button onMouseEnter={() => setHoverDarkBtn(true)} onMouseLeave={() => setHoverDarkBtn(false)} onClick={toggleDarkMode}>
+            <IconContext.Provider value={{ size: "3em", className: "transition duration-500", color: darkBtnColor }}>
               { !darkMode && <MdOutlineDarkMode /> }
               { darkMode && <MdOutlineLightMode /> }
             </IconContext.Provider>
-          </button>
-          <div className="pb-3 text-white w-full md:w-auto">
-            <ul className="flex justify-center items-center md:text-xl">
+          </button> 
+          <div className="pb-3 text-white w-full md:w-auto pl-5">
+            <ul className="flex justify-center content-center md:text-xl">
               <li className="mr-10 mt-5">
                 <Link
                   to="/"
@@ -99,14 +135,10 @@ function Navbar() {
                 </Link>
               </li>
             </ul>
-          </div>
-          {/* <div className="Hamburger" onClick={toggleHamburger}>
-
-            <Hamburger />
-          </div> */}
+          </div> 
         </div>
-      </nav>
-    </>
+      }
+    </nav>
   );
 }
 
