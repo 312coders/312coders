@@ -70,6 +70,18 @@ const markers = [
     geocode: [41.9538493, -87.7342629],
     popUp: "ERIS Brewery and Cider House",
   },
+  {
+    geocode: [41.9308446, -87.6911398],
+    popUp: "Maplewood Brewery",
+  },
+  {
+    geocode: [41.9545903, -87.6934383],
+    popUp: "Burning Bush Brewery",
+  },
+  {
+    geocode: [41.9676024, -87.6749325],
+    popUp: "Cultivate by Forbidden Root",
+  },
 
 ];
 
