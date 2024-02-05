@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 // import Hamburger from "./Hamburger";
 import "./Navbar.css";
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { useState, useEffect, useMemo, useCallback, useContext } from "react";
 import { MdOutlineDarkMode, MdOutlineLightMode, MdMenu, MdMenuOpen } from "react-icons/md";
 import { IconContext } from "react-icons";
+import { DrawerContext } from "../App";
 
 function Navbar() {
   // DARK MODE //
@@ -25,17 +26,17 @@ function Navbar() {
   };
 
   // MOBILE MENU (BURGER BUTTON) //
-  const [hamburgerOpen, setHamburgerOpen] = useState(false);
   const [hoverBurgerBtn, setHoverBurgerBtn] = useState(false);
   const [showBurger, setShowBurger] = useState(true);
-
-  const toggleHamburger = useCallback(() => {
-    setHamburgerOpen(prevState => !prevState);
-  }, []);
+  const drawer = useContext(DrawerContext);
 
   const closeMobileMenu = useCallback(() => {
-    setHamburgerOpen(false);
+    drawer.setOpen(false);
   }, []);
+
+  const toggleMobileMenu = useCallback(() => {
+    drawer.setOpen(prevState => !prevState);
+  })
 
   const showButton = () => {
     if (window.innerWidth <= 512) {
@@ -44,7 +45,7 @@ function Navbar() {
       setShowBurger(false);
     }
 
-    setHamburgerOpen(false);
+    drawer.setOpen(false);
   };
 
   useEffect(() => {
@@ -78,12 +79,12 @@ function Navbar() {
           <button
             onMouseEnter={() => setHoverBurgerBtn(true)}
             onMouseLeave={() => setHoverBurgerBtn(false)}
-            onClick={toggleHamburger}
+            onClick={toggleMobileMenu}
             className="flex justify-center items-center"
           >
             <IconContext.Provider value={{ size: "3em", className: "transition duration-500", color: burgerBtnColor }}>
-              { !hamburgerOpen && <MdMenu /> }
-              { hamburgerOpen && <MdMenuOpen /> }
+              { !drawer.open && <MdMenu /> }
+              { drawer.open && <MdMenuOpen /> }
             </IconContext.Provider>
           </button> 
         </div>

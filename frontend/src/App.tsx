@@ -3,7 +3,6 @@ import About from "./components/About";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Discord from "./components/Discord";
-
 import Community from "./components/Community";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
@@ -14,11 +13,20 @@ import { api } from "./api";
 import { AlertContextProvider } from "./hooks/useAlert";
 import Alert from "./components/Alert";
 import PostPreviewPage from "./pages/PostPreviewPage";
+import Drawer from "./components/Drawer";
+import { createContext, useState } from "react";
+
+export const DrawerContext = createContext<any>({} as any);
 
 const Layout = () => {
+  const [open, setOpen] = useState(false);
+
   return (
     <AlertContextProvider>
-      <Navbar />
+      <DrawerContext.Provider value={{ open, setOpen }}>
+        <Drawer />
+        <Navbar />
+      </DrawerContext.Provider>
       <main>
         <Outlet />
         <Alert />
