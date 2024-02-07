@@ -8,13 +8,13 @@
 - Run the Django server by running `python manage.py runserver`
 
 # Environments
-__NOTE__: There are different environments in which this app can run in, if you look under /backend/settings. (Base configs are stored in `base.py`)
+__NOTE__: There are different environments in which this app can run in, if you look under /settings. (Base configs are stored in `base.py`)
 - `local.py`: using SQLite database stored on the local filesystem _(default)_
 - `dev.py`: connecting to hosted/remote PostgreSQL DB
   - in order to use this environment, you will need to set up an environment file (`db.env` in the root /backend directory)
   - Contact Kevin for the credentials
   - ___WARNING___: this is not a file you want to commit, it is in the gitignore
 
-To run the app in `dev` mode and use the hosted DB (or apply migrations to the hosted DB) just change the `--settings` command-line argument: `python manage.py runserver --settings=backend.settings.dev`
+To run the app in `dev` mode and use the hosted DB (or apply migrations to the hosted DB) just change the `--settings` command-line argument: `python manage.py runserver --settings=settings.dev`
 
 Eventually we can establish a production environment, and staging/testing if necessary
