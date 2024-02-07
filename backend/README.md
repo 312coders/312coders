@@ -11,7 +11,7 @@
 __NOTE__: There are different environments in which this app can run in, if you look under /settings. (Base configs are stored in `base.py`)
 - `local.py`: using SQLite database stored on the local filesystem _(default)_
 - `dev.py`: connecting to hosted/remote PostgreSQL DB
-  - in order to use this environment, you will need to set up an environment file (`db.env` in the root /backend directory)
+  - in order to use this environment, you will need to set up an environment file (`.env` in the root /backend directory)
   - Contact Kevin for the credentials
   - ___WARNING___: this is not a file you want to commit, it is in the gitignore
 

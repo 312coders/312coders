@@ -7,6 +7,8 @@ from .models import Post
 
 from .serializers import GroupSerializer, PostSerializer, UserSerializer
 
+# https://www.django-rest-framework.org/tutorial/quickstart/
+
 class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
