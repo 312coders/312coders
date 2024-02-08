@@ -22,6 +22,9 @@ from rest_framework import routers
 
 from blog import views
 
+# https://djangocentral.com/building-a-blog-application-with-django/
+# https://www.django-rest-framework.org/tutorial/quickstart/
+
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)

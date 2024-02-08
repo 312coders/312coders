@@ -1,3 +1,5 @@
+# https://github.com/tngeene/weather-stats-api
+
 FROM python:3.11
 
 ENV PYTHONUNBUFFERED 1
