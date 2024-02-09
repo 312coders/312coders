@@ -55,3 +55,17 @@
     margin-top: 3rem;
   }
 }
+
+.drawer {
+  animation-name: drawer-anim;
+  animation-duration: 0.5s;
+  animation-timing-function: forwards;
+}
+
+@keyframes drawer-anim {
+  from {
+    right: -100%;
+  } to {
+    right: 0;
+  }
+}
