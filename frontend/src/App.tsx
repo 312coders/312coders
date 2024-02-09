@@ -14,12 +14,17 @@ import { AlertContextProvider } from "./hooks/useAlert";
 import Alert from "./components/Alert";
 import PostPreviewPage from "./pages/PostPreviewPage";
 import Drawer from "./components/Drawer";
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const DrawerContext = createContext<any>({} as any);
 
 const Layout = () => {
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (open) document.body.classList.add('overflow-hidden');
+      else document.body.classList.remove('overflow-hidden');
+  }, [open]);
 
   return (
     <AlertContextProvider>
