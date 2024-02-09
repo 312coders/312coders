@@ -64,3 +64,14 @@ node_modules/
 
 dist
 .firebase
+
+
+
+# python
+.venv
+
+*.env
+*.sqlite3
+__pycache__
+
+*.secrets

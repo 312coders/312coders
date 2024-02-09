@@ -1,0 +1,32 @@
+# https://github.com/tngeene/weather-stats-api
+
+version: '3'
+services:
+
+  312coders_django:
+    build: .
+    container_name: 312coders_django
+    restart: unless-stopped
+    volumes:
+      - static:/app/static
+      - media:/app/media
+
+  312coders_nginx:
+    build: ./nginx/
+    container_name: 312coders_nginx
+    restart: unless-stopped
+    volumes:
+      - ./nginx/:/etc/nginx/conf.d
+      - ./nginx/logs/:/app/logs
+      - static:/app/static
+      - media:/app/media
+    ports:
+      - 8000:80
+    depends_on:
+      - 312coders_django
+    links:
+      - 312coders_django
+
+volumes:
+  media:
+  static:
