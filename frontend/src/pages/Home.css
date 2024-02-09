@@ -34,6 +34,18 @@
     2px 2px 0 #000000;
 }
 
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+.logo-pulse {
+  animation: pulse 2s infinite;
+}
+
 @media (max-width: 769px) {
   .intro {
     margin-top: 2rem;

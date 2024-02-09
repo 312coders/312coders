@@ -2,6 +2,7 @@ import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import About from "./components/About";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
+import Discord from "./components/Discord";
 
 import Community from "./components/Community";
 import Contact from "./components/Contact";
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "/community",
         element: <Community />
+      },
+      {
+        path: "/discord",
+        element: <Discord />
       },
       {
         path: "/contact",
@@ -95,6 +100,10 @@ function App() {
   return (
     <RouterProvider router={router} />
   );
+}
+
+if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  document.querySelector('html')?.classList.add('dark');
 }
 
 export default App;
