@@ -24,7 +24,7 @@ function Drawer () {
 
     return (
         <aside
-            className="bg-black/50 fixed z-20 w-full h-screen overflow-hidden text-white"
+            className="bg-black/50 fixed z-[1200] w-full h-screen overflow-hidden text-white"
         >
             <div
                 className="bg-dark-blue dark:bg-slate-900 fixed right-0 w-3/4 h-screen py-12 flex flex-col items-center gap-3 drawer"

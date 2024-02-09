@@ -31,7 +31,7 @@ const Layout = () => {
       <DrawerContext.Provider value={{ open, setOpen }}>
         { open && <Drawer /> }
         <Navbar />
-        <main>
+        <main className="pt-16">
           <Outlet />
           <Alert />
         </main>

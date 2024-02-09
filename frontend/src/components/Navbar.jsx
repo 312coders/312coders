@@ -66,7 +66,7 @@ function Navbar() {
   }, [hoverBurgerBtn]);
 
   return (
-    <nav className="border-b border-slate-600 bg-dark-blue dark:bg-slate-900 flex justify-center h-16">
+    <nav className="border-b border-slate-600 bg-dark-blue dark:bg-slate-900 flex justify-center h-16 fixed w-screen z-[1100]">
       { showBurger && 
         <div className="navbar flex justify-between items-center px-8 w-full max-w-96 h-full">
           <Link to="/">
