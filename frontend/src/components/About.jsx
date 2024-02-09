@@ -5,6 +5,8 @@ import pinIcon from "/marker-icon.png";
 import MarkerClusterGroup from "react-leaflet-cluster";
 import Photo from "./PhotoGrid";
 
+
+//test comment to re-push 
 const markers = [
   {
     geocode: [41.9428, -87.7083],
