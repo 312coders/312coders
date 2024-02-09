@@ -73,3 +73,5 @@ dist
 *.env
 *.sqlite3
 __pycache__
+
+*.secrets
