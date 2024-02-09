@@ -1,4 +1,4 @@
-import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Outlet, RouterProvider, createBrowserRouter, useLocation } from "react-router-dom";
 import About from "./components/About";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
@@ -20,11 +20,16 @@ export const DrawerContext = createContext<any>({} as any);
 
 const Layout = () => {
   const [open, setOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     if (open) document.body.classList.add('overflow-hidden');
       else document.body.classList.remove('overflow-hidden');
   }, [open]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [location]);
 
   return (
     <AlertContextProvider>

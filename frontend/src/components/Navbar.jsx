@@ -65,11 +65,15 @@ function Navbar() {
       else return 'white';
   }, [hoverBurgerBtn]);
 
+  const scrollToTop = useCallback(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, []);
+
   return (
     <nav className="border-b border-slate-600 bg-dark-blue dark:bg-slate-900 flex justify-center h-16 fixed w-screen z-[1100]">
       { showBurger && 
         <div className="navbar flex justify-between items-center px-8 w-full max-w-96 h-full">
-          <Link to="/">
+          <Link to="/" onClick={closeMobileMenu}>
             <img
               alt='312 Coders Logo'
               src='/logo_mobile.webp'
@@ -112,7 +116,7 @@ function Navbar() {
                 <Link
                   to="/"
                   className="hover:text-red-500 transition duration-500"
-                  // onClick={toggleHamburger}
+                  onClick={closeMobileMenu}
                 >
                   Home
                 </Link>
