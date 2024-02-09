@@ -24,13 +24,13 @@ const Layout = () => {
   return (
     <AlertContextProvider>
       <DrawerContext.Provider value={{ open, setOpen }}>
-        <Drawer />
+        { open && <Drawer /> }
         <Navbar />
+        <main>
+          <Outlet />
+          <Alert />
+        </main>
       </DrawerContext.Provider>
-      <main>
-        <Outlet />
-        <Alert />
-      </main>
       <Footer />
     </AlertContextProvider>
   )

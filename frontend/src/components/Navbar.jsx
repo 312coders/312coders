@@ -76,17 +76,26 @@ function Navbar() {
               style={{width: 'auto', height: '48px', marginTop: 0}}
             />
           </Link>
-          <button
-            onMouseEnter={() => setHoverBurgerBtn(true)}
-            onMouseLeave={() => setHoverBurgerBtn(false)}
-            onClick={toggleMobileMenu}
-            className="flex justify-center items-center"
-          >
-            <IconContext.Provider value={{ size: "3em", className: "transition duration-500", color: burgerBtnColor }}>
-              { !drawer.open && <MdMenu /> }
-              { drawer.open && <MdMenuOpen /> }
-            </IconContext.Provider>
-          </button> 
+          <div className="flex gap-4">
+            <button onMouseEnter={() => setHoverDarkBtn(true)} onMouseLeave={() => setHoverDarkBtn(false)} onClick={toggleDarkMode}>
+              <IconContext.Provider value={{ size: "3em", className: "transition duration-500", color: darkBtnColor }}>
+                { !darkMode && <MdOutlineDarkMode /> }
+                { darkMode && <MdOutlineLightMode /> }
+              </IconContext.Provider>
+            </button> 
+            <button
+              onMouseEnter={() => setHoverBurgerBtn(true)}
+              onMouseLeave={() => setHoverBurgerBtn(false)}
+              onMouseDown={() => setHoverBurgerBtn(false)}
+              onClick={toggleMobileMenu}
+              className="flex justify-center items-center"
+            >
+              <IconContext.Provider value={{ size: "3em", className: "transition duration-500", color: burgerBtnColor }}>
+                { !drawer.open && <MdMenu /> }
+                { drawer.open && <MdMenuOpen /> }
+              </IconContext.Provider>
+            </button> 
+          </div>
         </div>
       }
       { !showBurger && 
