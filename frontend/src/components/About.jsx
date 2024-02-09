@@ -5,6 +5,8 @@ import pinIcon from "/marker-icon.png";
 import MarkerClusterGroup from "react-leaflet-cluster";
 import Photo from "./PhotoGrid";
 
+
+//test comment to re-push 
 const markers = [
   {
     geocode: [41.9428, -87.7083],
@@ -81,6 +83,10 @@ const markers = [
   {
     geocode: [41.9676024, -87.6749325],
     popUp: "Cultivate by Forbidden Root",
+  },
+  {
+    geocode: [41.952175, -87.649559],
+    popUp: "Good Times Brewery",
   },
 
 ];
