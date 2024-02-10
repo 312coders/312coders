@@ -28,7 +28,6 @@ function Community() {
           >
             MeetUp.com
           </a>
-          Next Event 
         </h3>
         <br></br>
         <Photo />
