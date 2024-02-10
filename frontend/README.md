@@ -10,11 +10,5 @@ Notes:
 
 ---
 
-## Deploy the site to Firebase
-1. Install the Firebase CLI by running `npm install -g firebase-tools`
-    - You only have to do this once
-2. Sign in to your Google account by running `firebase login`
-3. Build the site using `npm run build`
-4. Deploy the site using `firebase deploy`
-    - If you are asked which project to use, select "Use and existing project" and choose "code-312 (312 code)"
-4. Once deployed the site will be available at https://code-312.web.app
+## Firebase
+The site will automatically get deployed to [312coders.com](312coders.com) when a new branch is merged, this is set up through Github actions

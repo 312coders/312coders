@@ -1,9 +1,8 @@
-import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Outlet, RouterProvider, createBrowserRouter, useLocation } from "react-router-dom";
 import About from "./components/About";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Discord from "./components/Discord";
-
 import Community from "./components/Community";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
@@ -14,15 +13,34 @@ import { api } from "./api";
 import { AlertContextProvider } from "./hooks/useAlert";
 import Alert from "./components/Alert";
 import PostPreviewPage from "./pages/PostPreviewPage";
+import Drawer from "./components/Drawer";
+import { createContext, useState, useEffect } from "react";
+
+export const DrawerContext = createContext<any>({} as any);
 
 const Layout = () => {
+  const [open, setOpen] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (open) document.body.classList.add('overflow-hidden');
+      else document.body.classList.remove('overflow-hidden');
+  }, [open]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [location]);
+
   return (
     <AlertContextProvider>
-      <Navbar />
-      <main>
-        <Outlet />
-        <Alert />
-      </main>
+      <DrawerContext.Provider value={{ open, setOpen }}>
+        { open && <Drawer /> }
+        <Navbar />
+        <main className="pt-16">
+          <Outlet />
+          <Alert />
+        </main>
+      </DrawerContext.Provider>
       <Footer />
     </AlertContextProvider>
   )
