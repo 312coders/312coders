@@ -1,7 +1,10 @@
+from dotenv import load_dotenv
 from .base import *
 import os
 
 # https://simpleisbetterthancomplex.com/tips/2017/07/03/django-tip-20-working-with-multiple-settings-modules.html
+
+load_dotenv()
 
 DEBUG = False
 
