@@ -1,20 +1,14 @@
+import { createContext, useEffect, useState } from "react";
 import { Outlet, RouterProvider, createBrowserRouter, useLocation } from "react-router-dom";
-import About from "./components/About";
-import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
-import Discord from "./components/Discord";
-import Community from "./components/Community";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
-import ProtectedRoute from './components/ProtectedRoute';
-import AdminPostsPage from './pages/AdminPostsPage';
-import PostEditPage from './pages/PostEditPage';
-import { api } from "./api";
-import { AlertContextProvider } from "./hooks/useAlert";
+import About from "./pages/About";
 import Alert from "./components/Alert";
-import PostPreviewPage from "./pages/PostPreviewPage";
+import Community from "./components/Community";
+import Discord from "./components/Discord";
 import Drawer from "./components/Drawer";
-import { createContext, useState, useEffect } from "react";
+import Footer from "./components/Footer";
+import Navbar from "./components/Navbar";
+import { AlertContextProvider } from "./hooks/useAlert";
+import Home from "./pages/Home";
 
 export const DrawerContext = createContext<any>({} as any);
 
@@ -66,50 +60,6 @@ const router = createBrowserRouter([
         path: "/discord",
         element: <Discord />
       },
-      {
-        path: "/contact",
-        element: <Contact />
-      },
-      {
-        path: "/blog",
-        children: [
-          {
-            path: "admin-posts",
-            element:
-              <ProtectedRoute>
-                <AdminPostsPage />
-              </ProtectedRoute>,
-            loader: async () => {
-              return await api.blog.getPosts();
-            }
-          },
-          {
-            path: "edit/:id",
-            element:
-              <ProtectedRoute>
-                <PostEditPage />
-              </ProtectedRoute>,
-            loader: async ({ params }) => {
-              if (params.id) {
-                return await api.blog.getPost(params.id ?? '');
-              } else {
-                return null;
-              }
-            },
-          },
-          {
-            path: "post/:id",
-            element: <PostPreviewPage />,
-            loader: async ({ params }) => {
-              if (params.id) {
-                return await api.blog.getPost(params.id ?? '');
-              } else {
-                return null;
-              }
-            },
-          }
-        ]
-      }
     ]
   }
 ])

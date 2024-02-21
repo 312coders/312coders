@@ -1,6 +1,5 @@
-import About from "../components/About";
-import Discord from "../components/Discord";
 import Community from "../components/Community";
+import Discord from "../components/Discord";
 // import Contact from "../components/Contact";
 import "./Home.css";
 

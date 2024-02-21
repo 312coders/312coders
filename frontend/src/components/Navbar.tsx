@@ -13,12 +13,12 @@ function Navbar() {
 
   const darkBtnColor = useMemo(() => {
     if (hoverDarkBtn) return '#ef4444';
-      else return 'white';
+    else return 'white';
   }, [hoverDarkBtn]);
 
-  function toggleDarkMode () {
+  function toggleDarkMode() {
     document.querySelector('html')?.classList.remove('dark');
-    
+
     if (!darkMode) {
       document.querySelector('html')?.classList.add('dark');
       setDarkMode(true);
@@ -35,8 +35,8 @@ function Navbar() {
   }, []);
 
   const toggleMobileMenu = useCallback(() => {
-    drawer.setOpen(prevState => !prevState);
-  })
+    drawer.setOpen((prevState: boolean) => !prevState);
+  }, [])
 
   const showButton = () => {
     if (window.innerWidth <= 512) {
@@ -62,7 +62,7 @@ function Navbar() {
 
   const burgerBtnColor = useMemo(() => {
     if (hoverBurgerBtn) return '#ef4444';
-      else return 'white';
+    else return 'white';
   }, [hoverBurgerBtn]);
 
   const scrollToTop = useCallback(() => {
@@ -71,22 +71,22 @@ function Navbar() {
 
   return (
     <nav className="border-b border-slate-600 bg-dark-blue dark:bg-slate-900 flex justify-center h-16 fixed w-screen z-[1100]">
-      { showBurger && 
+      {showBurger &&
         <div className="navbar flex justify-between items-center px-8 w-full max-w-96 h-full">
           <Link to="/" onClick={closeMobileMenu}>
             <img
               alt='312 Coders Logo'
               src='/logo_mobile.webp'
-              style={{width: 'auto', height: '48px', marginTop: 0}}
+              style={{ width: 'auto', height: '48px', marginTop: 0 }}
             />
           </Link>
           <div className="flex gap-4">
             <button onMouseEnter={() => setHoverDarkBtn(true)} onMouseLeave={() => setHoverDarkBtn(false)} onClick={toggleDarkMode}>
               <IconContext.Provider value={{ size: "3em", className: "transition duration-500", color: darkBtnColor }}>
-                { !darkMode && <MdOutlineDarkMode /> }
-                { darkMode && <MdOutlineLightMode /> }
+                {!darkMode && <MdOutlineDarkMode />}
+                {darkMode && <MdOutlineLightMode />}
               </IconContext.Provider>
-            </button> 
+            </button>
             <button
               onMouseEnter={() => setHoverBurgerBtn(true)}
               onMouseLeave={() => setHoverBurgerBtn(false)}
@@ -95,21 +95,21 @@ function Navbar() {
               className="flex justify-center items-center"
             >
               <IconContext.Provider value={{ size: "3em", className: "transition duration-500", color: burgerBtnColor }}>
-                { !drawer.open && <MdMenu /> }
-                { drawer.open && <MdMenuOpen /> }
+                {!drawer.open && <MdMenu />}
+                {drawer.open && <MdMenuOpen />}
               </IconContext.Provider>
-            </button> 
+            </button>
           </div>
         </div>
       }
-      { !showBurger && 
+      {!showBurger &&
         <div className="navbar flex justify-between items-center px-7 w-full h-full">
           <button onMouseEnter={() => setHoverDarkBtn(true)} onMouseLeave={() => setHoverDarkBtn(false)} onClick={toggleDarkMode}>
             <IconContext.Provider value={{ size: "3em", className: "transition duration-500", color: darkBtnColor }}>
-              { !darkMode && <MdOutlineDarkMode /> }
-              { darkMode && <MdOutlineLightMode /> }
+              {!darkMode && <MdOutlineDarkMode />}
+              {darkMode && <MdOutlineLightMode />}
             </IconContext.Provider>
-          </button> 
+          </button>
           <div className="pb-3 text-white w-full md:w-auto pl-5">
             <ul className="flex justify-center content-center md:text-xl">
               <li className="mr-10 mt-5">
@@ -149,7 +149,7 @@ function Navbar() {
                 </Link>
               </li>
             </ul>
-          </div> 
+          </div>
         </div>
       }
     </nav>
