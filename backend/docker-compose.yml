@@ -23,7 +23,7 @@ services:
       - static:/app/static
       - media:/app/media
     ports:
-      - 8000:80
+      - 8001:80
     depends_on:
       - 312coders_django
     links:

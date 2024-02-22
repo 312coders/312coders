@@ -75,3 +75,7 @@ dist
 __pycache__
 
 *.secrets
+
+/backend/media/
+/backend/static/
+/frontend/src/api/
